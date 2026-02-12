@@ -93,7 +93,7 @@ async def on_command_error(ctx, error):
 #     """).strip()
 #     await ctx.send(msg)
 
-@bot.slash_command(name="q", description="get a question from an exam")
+@bot.hybrid_command(name="q")
 async def q(ctx: commands.Context, exam: str, number: int | None = None):
     exam_key = exam.lower()
     table = EXAMS.get(exam_key)
