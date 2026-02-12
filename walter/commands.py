@@ -49,22 +49,22 @@ async def on_command_error(ctx, error):
     print("COMMAND ERROR:", repr(error))
     await ctx.send(f"Error: {error}")
 
-@bot.slash_command(name="whatdoido")
-async def whatdoido(ctx):
-    msg = textwrap.dedent("""
-    I can help study with exams and keep you updated on club events!
+# @bot.slash_command(name="whatdoido")
+# async def whatdoido(ctx):
+#     msg = textwrap.dedent("""
+#     I can help study with exams and keep you updated on club events!
 
-    Some things I can do:
-        1) Send you an exam question/solution
-        2) Provide exam resources (coming soon)
-        3) Track the questions you've gotten right and wrong (coming soon)
-        4) Tell you about upcoming club events (coming soon)
+#     Some things I can do:
+#         1) Send you an exam question/solution
+#         2) Provide exam resources (coming soon)
+#         3) Track the questions you've gotten right and wrong (coming soon)
+#         4) Tell you about upcoming club events (coming soon)
 
-    Soon, I'll be able to do some other cool stuff that is secret for now.
+#     Soon, I'll be able to do some other cool stuff that is secret for now.
 
-    Now, get to studying.
-    """).strip()
-    await ctx.send(msg)
+#     Now, get to studying.
+#     """).strip()
+#     await ctx.send(msg)
 
 # @bot.slash_command(name="help")
 # async def help(ctx):
@@ -93,7 +93,7 @@ async def whatdoido(ctx):
 #     """).strip()
 #     await ctx.send(msg)
 
-@bot.slash_command(name="q")
+@bot.slash_command(name="q", description="get a question from an exam")
 async def q(ctx: commands.Context, exam: str, number: int | None = None):
     exam_key = exam.lower()
     table = EXAMS.get(exam_key)
