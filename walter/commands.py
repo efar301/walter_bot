@@ -73,11 +73,11 @@ async def help(ctx):
 
     1) Bot Features
         Get a list of things I can do
-        command usage !whatdoido
+        command usage \\whatdoido
 
     2) Exam questions
         You can get either a specific or random SOA exam question along with the solution in a spoiler
-        command usage: !q {exam_name} {question_num}
+        command usage: \\q {exam_name} {question_num}
 
     3) Track practice statistics
         With a little bit of help on your end, I can track personal and global question statistics, showing the easiest and hardest problems
