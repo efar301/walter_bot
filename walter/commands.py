@@ -49,7 +49,7 @@ async def on_command_error(ctx, error):
     print("COMMAND ERROR:", repr(error))
     await ctx.send(f"Error: {error}")
 
-@bot.command(name="whatdoido")
+@bot.slash_command(name="whatdoido")
 async def whatdoido(ctx):
     msg = textwrap.dedent("""
     I can help study with exams and keep you updated on club events!
@@ -66,34 +66,34 @@ async def whatdoido(ctx):
     """).strip()
     await ctx.send(msg)
 
-@bot.command(name="help")
-async def help(ctx):
-    msg = textwrap.dedent("""
-    **How to use walter**
+# @bot.slash_command(name="help")
+# async def help(ctx):
+#     msg = textwrap.dedent("""
+#     **How to use walter**
 
-    1) Bot Features
-        Get a list of things I can do
-        command usage \\whatdoido
+#     1) Bot Features
+#         Get a list of things I can do
+#         command usage \\whatdoido
 
-    2) Exam questions
-        You can get either a specific or random SOA exam question along with the solution in a spoiler
-        command usage: \\q {exam_name} {question_num}
+#     2) Exam questions
+#         You can get either a specific or random SOA exam question along with the solution in a spoiler
+#         command usage: \\q {exam_name} {question_num}
 
-    3) Track practice statistics
-        With a little bit of help on your end, I can track personal and global question statistics, showing the easiest and hardest problems
-        command usage: TBD
+#     3) Track practice statistics
+#         With a little bit of help on your end, I can track personal and global question statistics, showing the easiest and hardest problems
+#         command usage: TBD
 
-    4) Send exam resources
-        I can send you exam information/resources
-        command usage: TBD
+#     4) Send exam resources
+#         I can send you exam information/resources
+#         command usage: TBD
 
-    5) Update you on club events
-        I can tell you about our next upcoming club events and any other activities planned
-        command usage: TBD
-    """).strip()
-    await ctx.send(msg)
+#     5) Update you on club events
+#         I can tell you about our next upcoming club events and any other activities planned
+#         command usage: TBD
+#     """).strip()
+#     await ctx.send(msg)
 
-@bot.command(name="q")
+@bot.slash_command(name="q")
 async def q(ctx: commands.Context, exam: str, number: int | None = None):
     exam_key = exam.lower()
     table = EXAMS.get(exam_key)
