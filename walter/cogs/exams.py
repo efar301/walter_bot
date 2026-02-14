@@ -4,16 +4,16 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 
-from ..config import GUILD_ID
+from ..config import GUILD_ID, EXAMS, EXAM_CHOICES
 from ..db import table_exists, fetch_random, fetch_by_number
 
-EXAMS = {"p": "exam_p", "fm": "exam_fm", "fam": "exam_fam", "srm": "exam_srm"}
-EXAM_CHOICES = [
-    app_commands.Choice(name="P", value="p"),
-    app_commands.Choice(name="FM", value="fm"),
-    app_commands.Choice(name="FAM", value="fam"),
-    app_commands.Choice(name="SRM", value="srm"),
-]
+# EXAMS = {"p": "exam_p", "fm": "exam_fm", "fam": "exam_fam", "srm": "exam_srm"}
+# EXAM_CHOICES = [
+#     app_commands.Choice(name="P", value="p"),
+#     app_commands.Choice(name="FM", value="fm"),
+#     app_commands.Choice(name="FAM", value="fam"),
+#     app_commands.Choice(name="SRM", value="srm"),
+# ]
 
 class ExamsCog(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
@@ -30,7 +30,7 @@ class ExamsCog(commands.Cog):
         exam_key = exam.lower()
         table = EXAMS.get(exam_key)
         if table is None:
-            await ctx.send("Exam must be one of: P, FM, FAM, SRM.")
+            await ctx.send(f"Exam must be one of: {EXAMS.keys()}")
             return
 
         if not await table_exists(table):
