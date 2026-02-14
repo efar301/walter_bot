@@ -9,6 +9,7 @@ cur.execute(
     """
     CREATE TABLE IF NOT EXISTS users (
         user_id INTEGER PRIMARY KEY,
+        stat_decay INTEGER NOT NULL,
         created_at TEXT NOT NULL
     )
     """
