@@ -1,6 +1,6 @@
 import sqlite3
 
-from .config import DB_PATH
+from walter.config import DB_PATH
 
 conn = sqlite3.connect(DB_PATH)
 cur = conn.cursor()
