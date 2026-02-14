@@ -3,11 +3,13 @@ import random
 import textwrap
 import aiosqlite
 import discord
+from discord import app_commands
 from discord.ext import commands
 
 from .bot_instance import bot
 
 DB_PATH = os.getenv("EXAM_DB_PATH", "../sql/exam_db.sqlite")
+GUILD_ID = int(os.getenv("WALTER_GUILD_ID", "1467999486403018824"))
 EXAMS = {"p": "exam_p", "fm": "exam_fm", "fam": "exam_fam", "srm": "exam_srm"}
 
 async def fetch_one(query: str, params=()):
@@ -42,6 +44,11 @@ async def fetch_by_number(table: str, num: int):
 
 @bot.event
 async def on_ready():
+    if not getattr(bot, "_synced", False):
+        guild = discord.Object(id=GUILD_ID)
+        bot.tree.copy_global_to(guild=guild)
+        await bot.tree.sync(guild=guild)
+        bot._synced = True
     print(f"READY as {bot.user} | message_content={bot.intents.message_content}")
 
 @bot.event
@@ -49,35 +56,37 @@ async def on_command_error(ctx, error):
     print("COMMAND ERROR:", repr(error))
     await ctx.send(f"Error: {error}")
 
-# @bot.slash_command(name="whatdoido")
-# async def whatdoido(ctx):
-#     msg = textwrap.dedent("""
-#     I can help study with exams and keep you updated on club events!
+@bot.hybrid_command(name="whatdoido", description="What the bot can do right now.")
+@app_commands.guilds(discord.Object(id=GUILD_ID))
+async def whatdoido(ctx: commands.Context):
+    msg = textwrap.dedent("""
+    I can help study with exams and keep you updated on club events!
 
-#     Some things I can do:
-#         1) Send you an exam question/solution
-#         2) Provide exam resources (coming soon)
-#         3) Track the questions you've gotten right and wrong (coming soon)
-#         4) Tell you about upcoming club events (coming soon)
+    Some things I can do:
+        1) Send you an exam question/solution
+        2) Provide exam resources (coming soon)
+        3) Track the questions you've gotten right and wrong (coming soon)
+        4) Tell you about upcoming club events (coming soon)
 
-#     Soon, I'll be able to do some other cool stuff that is secret for now.
+    Soon, I'll be able to do some other cool stuff that is secret for now.
 
-#     Now, get to studying.
-#     """).strip()
-#     await ctx.send(msg)
+    Now, get to studying.
+    """).strip()
+    await ctx.send(msg)
 
-# @bot.slash_command(name="help")
-# async def help(ctx):
+# @bot.hybrid_command(name="help", description="How to use Walter.")
+# @app_commands.guilds(discord.Object(id=GUILD_ID))
+# async def help(ctx: commands.Context):
 #     msg = textwrap.dedent("""
 #     **How to use walter**
 
 #     1) Bot Features
 #         Get a list of things I can do
-#         command usage \\whatdoido
+#         command usage /whatdoido
 
 #     2) Exam questions
 #         You can get either a specific or random SOA exam question along with the solution in a spoiler
-#         command usage: \\q {exam_name} {question_num}
+#         command usage: /q {exam_name} {question_num}
 
 #     3) Track practice statistics
 #         With a little bit of help on your end, I can track personal and global question statistics, showing the easiest and hardest problems
@@ -93,7 +102,20 @@ async def on_command_error(ctx, error):
 #     """).strip()
 #     await ctx.send(msg)
 
-@bot.hybrid_command(name="q")
+EXAM_CHOICES = [
+    app_commands.Choice(name="P", value="p"),
+    app_commands.Choice(name="FM", value="fm"),
+    app_commands.Choice(name="FAM", value="fam"),
+    app_commands.Choice(name="SRM", value="srm"),
+]
+
+@bot.hybrid_command(name="q", description="Get a random or specific exam question.")
+@app_commands.guilds(discord.Object(id=GUILD_ID))
+@app_commands.describe(
+    exam="Which exam?",
+    number="Optional question number. Leave blank for a random question.",
+)
+@app_commands.choices(exam=EXAM_CHOICES)
 async def q(ctx: commands.Context, exam: str, number: int | None = None):
     exam_key = exam.lower()
     table = EXAMS.get(exam_key)
@@ -120,4 +142,3 @@ async def q(ctx: commands.Context, exam: str, number: int | None = None):
 
     file = discord.File(img_path, filename=os.path.basename(img_path))
     await ctx.send(f"**Exam {exam_key.upper()} Question {qnum}**\nSolution: ||{ans}||", file=file)
-
