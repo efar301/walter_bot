@@ -1,6 +1,5 @@
 import os
 from walter.bot_instance import bot
-import walter.commands  # noqa: F401  (import for side effects: registers decorators)
 
 def main():
     token = os.getenv("WALTER_BOT_TOKEN")
@@ -10,4 +9,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
