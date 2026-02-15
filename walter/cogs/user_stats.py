@@ -6,7 +6,7 @@ from discord.ext import commands
 
 # todo: create new db function to collect stats per user
 from ..config import GUILD_ID, EXAMS, EXAM_CHOICES
-from ..db import table_exists, fetch_user_topic_stats, fetch_exam_topics
+from ..db import table_exists, fetch_user_topic_stats, fetch_exam_topics, fetch_user_exam_totals
 
 class StatsCog(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
@@ -49,6 +49,21 @@ class StatsCog(commands.Cog):
             exam = exam.value
         topics = await fetch_exam_topics(str(exam), current)
         return [app_commands.Choice(name=topic, value=topic) for topic in topics]
+
+    @commands.hybrid_command(name="mastery", description="Get mastery for a specific exam.")
+    @app_commands.guilds(discord.Object(id=GUILD_ID))
+    @app_commands.describe(
+        exam="Which exam?",
+    )
+    @app_commands.choices(exam=EXAM_CHOICES)
+    async def mastery(self, ctx: commands.Context, exam: str):
+        table = EXAMS.get(exam)
+        correct, attempted, total = await fetch_user_exam_totals(ctx.author.id, exam, table)
+        ctx.send("" \
+                 f"**Exam {exam.upper()} Statistics**\n"
+                 f"Total Correct: {correct}\n"
+                 f"Total Attempted: {attempted}\n"
+                 f"Percent Correct: {round(correct / total)}")
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(StatsCog(bot))

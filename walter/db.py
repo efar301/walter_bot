@@ -108,6 +108,7 @@ async def fetch_by_topic(table: str, exam: str, topic: str):
         (exam, topic, offset),
     )
 
+# gets question topics for an exam
 async def fetch_question_topics(exam: str, question_number: int):
     sql = """
     SELECT t.name
@@ -120,6 +121,27 @@ async def fetch_question_topics(exam: str, question_number: int):
         async with db.execute(sql, (exam, question_number)) as cur:
             rows = await cur.fetchall()
             return [row[0] for row in rows]
+
+# returns the exam stats
+async def fetch_user_exam_totals(user_id: int, exam: str, table: str):
+    exam = exam.lower()
+    correct_row = await fetch_one_question(
+        """
+        SELECT COALESCE(SUM(correct), 0) AS correct_count,
+               COUNT(*) AS attempted_count
+        FROM attempts
+        WHERE user_id = ? AND exam = ?
+        """,
+        (user_id, exam),
+    )
+    total_row = await fetch_one_question(
+        f"SELECT COUNT(*) AS total_count FROM {table}"
+    )
+    return (
+        int(correct_row["correct_count"]),
+        int(correct_row["attempted_count"]),
+        int(total_row["total_count"]),
+    )
 
 async def fetch_exam_topics(exam: str, query: str = "", limit: int = 25):
     exam = exam.lower()
@@ -137,6 +159,7 @@ async def fetch_exam_topics(exam: str, query: str = "", limit: int = 25):
             rows = await cur.fetchall()
             return [row[0] for row in rows]
 
+# gets user exam stats per topic
 async def fetch_user_topic_stats(
     user_id: int,
     exam: str,
@@ -175,3 +198,4 @@ async def fetch_user_topic_stats(
     async with aiosqlite.connect(DB_PATH) as db:
         async with db.execute(sql, params) as cur:
             return await cur.fetchall()
+
