@@ -33,7 +33,8 @@ class StatsCog(commands.Cog):
         topic_stats = await(fetch_user_topic_stats(ctx.author.id, exam, topics))
         if not topic_stats:
             await ctx.send("No problems for this topic attempted yet.")
-            
+            return
+
         reply = f"**Exam {exam.upper()} Stats**\n"
         for topic_stat in topic_stats:
             reply += f"**{topic_stat[0].upper()}**: {topic_stat[1]} correct / {topic_stat[2]} attempted | {topic_stat[3]}% correct\n"
