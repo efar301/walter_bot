@@ -9,7 +9,7 @@ async def create_user(user_id: int) -> None:
     async with aiosqlite.connect(DB_PATH) as db:
         created_at = datetime.now(timezone.utc).isoformat()
         await db.execute(
-            "INSERT INTO users (user_id, stat_decay, created_at) VALUES (?, ?, ?)",
+            "INSERT OR IGNORE INTO users (user_id, stat_decay, created_at) VALUES (?, ?, ?)",
             (user_id, 0, created_at,)
         )
         await db.commit()
@@ -72,6 +72,19 @@ async def fetch_by_number(table: str, num: int):
         f"SELECT number, question_dir, solution FROM {table} WHERE number=?",
         (num,),
     )
+
+async def fetch_question_topics(exam: str, question_number: int):
+    sql = """
+    SELECT t.name
+    FROM question_topics qt
+    JOIN topics t ON qt.topic_id = t.topic_id
+    WHERE qt.exam = ? AND qt.question_number = ?
+    ORDER BY t.name
+    """
+    async with aiosqlite.connect(DB_PATH) as db:
+        async with db.execute(sql, (exam, question_number)) as cur:
+            rows = await cur.fetchall()
+            return [row[0] for row in rows]
 
 async def fetch_user_topic_stats(
     user_id: int,
