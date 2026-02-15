@@ -75,7 +75,7 @@ class ExamsCog(commands.Cog):
             await ctx.send(f"Table `{table}` doesn't exist yet.")
             return
 
-        row = await (fetch_by_number(table, number) if number is not None else fetch_random(table))
+        row = await(fetch_by_number(table, number) if number is not None else fetch_random(table))
         if row is None:
             await ctx.send("No question found.")
             return

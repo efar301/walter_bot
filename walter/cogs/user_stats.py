@@ -6,9 +6,9 @@ from discord.ext import commands
 
 # todo: create new db function to collect stats per user
 from ..config import GUILD_ID, EXAMS, EXAM_CHOICES
-from ..db import table_exists
+from ..db import table_exists, fetch_user_topic_stats
 
-class UserStatsCog(commands.Cog):
+class StatsCog(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
 
@@ -16,7 +16,7 @@ class UserStatsCog(commands.Cog):
     @app_commands.guilds(discord.Object(id=GUILD_ID))
     @app_commands.describe(
         exam="Which exam?",
-        topic="Which topics?",
+        topic="Which topics? (leave empty for all)",
     )
     @app_commands.choices(exam=EXAM_CHOICES)
     async def userstat(self, ctx: commands.Context, exam: str, topics: str | None = None):
@@ -29,7 +29,12 @@ class UserStatsCog(commands.Cog):
         if not await table_exists(table):
             await ctx.send(f"Table `{table}` doesn't exist yet.")
             return
-    
+        
+        topic_stats = await(fetch_user_topic_stats(ctx.author.id, exam, topics))
+        reply = f"""
+                **Exam {exam} Stats**
+                """
+        await ctx.send(topic_stats)
 
 async def setup(bot: commands.Bot):
-    await bot.add_cog(UserStatsCog(bot))
+    await bot.add_cog(StatsCog(bot))

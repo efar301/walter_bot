@@ -96,7 +96,6 @@ async def fetch_user_topic_stats(
 
     sql = """
     SELECT
-        t.topic_id,
         t.name,
         SUM(CASE WHEN a.correct = 1 THEN 1 ELSE 0 END) AS correct_count,
         COUNT(*) AS total_count,
@@ -115,8 +114,9 @@ async def fetch_user_topic_stats(
         sql += f" AND t.name IN ({placeholders})"
         params.extend(topic_list)
 
-    sql += " GROUP BY t.topic_id, t.name;"
+    sql += " GROUP BY t.name;"
 
     async with aiosqlite.connect(DB_PATH) as db:
         async with db.execute(sql, params) as cur:
             return await cur.fetchall()
+    
