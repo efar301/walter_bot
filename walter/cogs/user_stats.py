@@ -5,8 +5,8 @@ from discord import app_commands
 from discord.ext import commands
 
 # todo: create new db function to collect stats per user
-from ..config import GUILD_ID, EXAMS, EXAM_CHOICES
-from ..db import table_exists, fetch_user_topic_stats, fetch_exam_topics, fetch_user_exam_totals
+from ..config import GUILD_ID, EXAMS, EXAM_CHOICES, BOOLEAN_CHOICES
+from ..db import table_exists, fetch_user_topic_stats, fetch_exam_topics, fetch_user_exam_totals, update_user_stat_decay
 
 class StatsCog(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
@@ -65,6 +65,17 @@ class StatsCog(commands.Cog):
                  f"Total Attempted: {attempted}\n"
                  f"Percent Correct: {round(correct / total, 2)}%"
                  )
+
+    @commands.hybrid_command(name="statdecay", description="Enable or disable stat decay (your correctly answered questions become wrong after 30 days)")
+    @app_commands.guilds(discord.Object(id=GUILD_ID))
+    @app_commands.describe(
+        value="True or False?",
+    )
+    @app_commands.choices(value=BOOLEAN_CHOICES)
+    async def statdecay(self, ctx: commands.Context, value: bool):
+        await update_user_stat_decay(ctx.author.id, value)
+
+    
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(StatsCog(bot))
