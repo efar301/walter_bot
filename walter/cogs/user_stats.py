@@ -67,6 +67,7 @@ class StatsCog(commands.Cog):
                  f"**Exam {exam.upper()} Statistics**\n"
                  f"Total Correct: {correct}\n"
                  f"Total Attempted: {attempted}\n"
+                 f"Total Questions: {total}\n"
                  f"Percent Correct: {round(correct / total, 2) * 100}%"
                  )
 
