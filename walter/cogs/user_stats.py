@@ -16,7 +16,7 @@ class StatsCog(commands.Cog):
     @app_commands.guilds(discord.Object(id=GUILD_ID))
     @app_commands.describe(
         exam="Which exam?",
-        topic="Which topics? (leave empty for all)",
+        topics="Which topics? (leave empty for all)",
     )
     @app_commands.choices(exam=EXAM_CHOICES)
     async def userstat(self, ctx: commands.Context, exam: str, topics: str | None = None):
