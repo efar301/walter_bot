@@ -40,7 +40,7 @@ class StatsCog(commands.Cog):
             reply += f"**{topic_stat[0].upper()}**: {topic_stat[1]} correct / {topic_stat[2]} attempted | {topic_stat[3] * 100}% correct\n"
         await ctx.send(reply.strip())
 
-    @userstat.autocomplete("topics")
+    @userstats.autocomplete("topics")
     async def userstat_topics_autocomplete(
         self,
         interaction: discord.Interaction,
