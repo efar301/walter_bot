@@ -10,6 +10,7 @@ from ..db import (
     create_user,
     fetch_by_number,
     fetch_question_topics,
+    fetch_by_topic,
     fetch_random,
     table_exists,
 )
@@ -88,6 +89,51 @@ class ExamsCog(commands.Cog):
             await ctx.send(f"Exam {table} #{qnum}: image not found at `{img_path}`.")
             return
 
+        topics = await fetch_question_topics(exam_key, qnum)
+        topics_text = ", ".join(topics) if topics else "none"
+
+        file = discord.File(img_path, filename=os.path.basename(img_path))
+        view = ExamsCog.AnswerView(exam_key, qnum, ans)
+        await ctx.send(
+            f"**Exam {exam_key.upper()} Question {qnum}**\n"
+            f"Topics: ||{topics_text}||\n"
+            f"Solution: ||{ans}||",
+            file=file,
+            view=view,
+        )
+
+    @commands.hybrid_command(name="qt", description="Get a random question by exam topic")
+    @app_commands.guilds(discord.Object(id=GUILD_ID))
+    @app_commands.describe(
+        exam="Which exam?",
+        topic="What topic?",
+    )
+    @app_commands.choices(exam=EXAM_CHOICES)
+    async def qt(self, ctx: commands.Context, exam: str, topic: str):
+        exam_key = exam.lower()
+        table = EXAMS.get(exam_key)
+
+        if table is None:
+            await ctx.send(f"Exam must be one of: {EXAMS.keys()}")
+            return
+
+        if not await table_exists(table):
+            await ctx.send(f"Table `{table}` doesn't exist yet.")
+            return
+        
+        row = fetch_by_topic(table, exam, topic)
+        if row is None:
+            await ctx.send("No question found.")
+            return
+        
+        qnum = int(row["number"])
+        img_path = row["question_dir"]
+        ans = str(row['solution']).strip().upper()
+
+        if not img_path or not os.path.exists(img_path):
+            await ctx.send(f"Exam {table} #{qnum}: image not found at `{img_path}`.")
+            return
+        
         topics = await fetch_question_topics(exam_key, qnum)
         topics_text = ", ".join(topics) if topics else "none"
 

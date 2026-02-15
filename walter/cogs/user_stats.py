@@ -6,7 +6,7 @@ from discord.ext import commands
 
 # todo: create new db function to collect stats per user
 from ..config import GUILD_ID, EXAMS, EXAM_CHOICES
-from ..db import table_exists, fetch_user_topic_stats
+from ..db import table_exists, fetch_user_topic_stats, fetch_exam_topics
 
 class StatsCog(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
@@ -31,10 +31,24 @@ class StatsCog(commands.Cog):
             return
         
         topic_stats = await(fetch_user_topic_stats(ctx.author.id, exam, topics))
-        reply = f"**Exam {exam} Stats**\n"
+        reply = f"**Exam {exam.upper()} Stats**\n"
         for topic_stat in topic_stats:
             reply += f"**{topic_stat[0].upper()}**: {topic_stat[1]} correct / {topic_stat[2]} attempted | {topic_stat[3]}% correct\n"
         await ctx.send(reply.strip())
+
+    @userstat.autocomplete("topics")
+    async def userstat_topics_autocomplete(
+        self,
+        interaction: discord.Interaction,
+        current: str,
+    ):
+        exam = getattr(interaction.namespace, "exam", None)
+        if exam is None:
+            return []
+        if hasattr(exam, "value"):
+            exam = exam.value
+        topics = await fetch_exam_topics(str(exam), current)
+        return [app_commands.Choice(name=topic, value=topic) for topic in topics]
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(StatsCog(bot))

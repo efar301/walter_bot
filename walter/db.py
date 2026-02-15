@@ -73,6 +73,41 @@ async def fetch_by_number(table: str, num: int):
         (num,),
     )
 
+# gets a random exam question from specified exam by topic
+async def fetch_by_topic(table: str, exam: str, topic: str):
+    # count matching questions
+    row = await fetch_one_question(
+        f"""
+        SELECT COUNT(*) AS n
+        FROM {table} e
+        JOIN question_topics qt
+            ON qt.exam = ? AND qt.question_number = e.number
+        JOIN topics t
+            ON qt.topic_id = t.topic_id
+        WHERE t.name = ?
+        """,
+        (exam, topic),
+    )
+    n = int(row["n"])
+    if n == 0:
+        return None
+
+    import random
+    offset = random.randrange(n)
+    return await fetch_one_question(
+        f"""
+        SELECT e.number, e.question_dir, e.solution
+        FROM {table} e
+        JOIN question_topics qt
+            ON qt.exam = ? AND qt.question_number = e.number
+        JOIN topics t
+            ON qt.topic_id = t.topic_id
+        WHERE t.name = ?
+        LIMIT 1 OFFSET ?
+        """,
+        (exam, topic, offset),
+    )
+
 async def fetch_question_topics(exam: str, question_number: int):
     sql = """
     SELECT t.name
@@ -86,13 +121,34 @@ async def fetch_question_topics(exam: str, question_number: int):
             rows = await cur.fetchall()
             return [row[0] for row in rows]
 
+async def fetch_exam_topics(exam: str, query: str = "", limit: int = 25):
+    exam = exam.lower()
+    query = (query or "").strip()
+    like = f"%{query}%"
+    sql = """
+    SELECT name
+    FROM topics
+    WHERE exam = ? AND name LIKE ?
+    ORDER BY name
+    LIMIT ?
+    """
+    async with aiosqlite.connect(DB_PATH) as db:
+        async with db.execute(sql, (exam, like, limit)) as cur:
+            rows = await cur.fetchall()
+            return [row[0] for row in rows]
+
 async def fetch_user_topic_stats(
     user_id: int,
     exam: str,
-    topics: Optional[Iterable[str]] = None,
+    topics: Optional[Iterable[str] | str] = None,
 ):
     exam = exam.lower()
-    topic_list = [t.strip() for t in topics] if topics else []
+    if topics is None:
+        topic_list = []
+    elif isinstance(topics, str):
+        topic_list = [t.strip() for t in topics.split(",") if t.strip()]
+    else:
+        topic_list = [str(t).strip() for t in topics if str(t).strip()]
 
     sql = """
     SELECT
@@ -119,4 +175,3 @@ async def fetch_user_topic_stats(
     async with aiosqlite.connect(DB_PATH) as db:
         async with db.execute(sql, params) as cur:
             return await cur.fetchall()
-    
