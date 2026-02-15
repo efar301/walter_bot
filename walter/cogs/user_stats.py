@@ -36,7 +36,7 @@ class StatsCog(commands.Cog):
                 """
         for topic_stat in topic_stats:
             reply += f"**{topic_stat[0]}**: {topic_stat[1]} correct / {topic_stat[2]} attempted | {topic_stat[3]}% correct\n"
-        await ctx.send(reply.trim())
+        await ctx.send(reply.strip())
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(StatsCog(bot))
