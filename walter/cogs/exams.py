@@ -11,6 +11,7 @@ from ..db import (
     fetch_by_number,
     fetch_question_topics,
     fetch_by_topic,
+    fetch_exam_topics,
     fetch_random,
     table_exists,
 )
@@ -121,7 +122,7 @@ class ExamsCog(commands.Cog):
             await ctx.send(f"Table `{table}` doesn't exist yet.")
             return
         
-        row = fetch_by_topic(table, exam, topic)
+        row = await fetch_by_topic(table, exam_key, topic)
         if row is None:
             await ctx.send("No question found.")
             return
@@ -146,6 +147,20 @@ class ExamsCog(commands.Cog):
             file=file,
             view=view,
         )
+
+    @qt.autocomplete("topic")
+    async def qt_topic_autocomplete(
+        self,
+        interaction: discord.Interaction,
+        current: str,
+    ):
+        exam = getattr(interaction.namespace, "exam", None)
+        if exam is None:
+            return []
+        if hasattr(exam, "value"):
+            exam = exam.value
+        topics = await fetch_exam_topics(str(exam), current)
+        return [app_commands.Choice(name=topic, value=topic) for topic in topics]
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(ExamsCog(bot))
