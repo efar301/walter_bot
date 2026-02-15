@@ -95,7 +95,7 @@ class ExamsCog(commands.Cog):
         view = ExamsCog.AnswerView(exam_key, qnum, ans)
         await ctx.send(
             f"**Exam {exam_key.upper()} Question {qnum}**\n"
-            f"Topics: {topics_text}\n"
+            f"Topics: ||{topics_text}||\n"
             f"Solution: ||{ans}||",
             file=file,
             view=view,
