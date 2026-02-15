@@ -73,6 +73,7 @@ class StatsCog(commands.Cog):
     )
     async def statdecay(self, ctx: commands.Context, value: bool):
         await update_user_stat_decay(ctx.author.id, value)
+        await ctx.send(f"Stat decay set to {value}.", ephemeral=True)
 
     
 
