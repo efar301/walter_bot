@@ -59,11 +59,12 @@ class StatsCog(commands.Cog):
     async def mastery(self, ctx: commands.Context, exam: str):
         table = EXAMS.get(exam)
         correct, attempted, total = await fetch_user_exam_totals(ctx.author.id, exam, table)
-        ctx.send("" \
+        await ctx.send("" \
                  f"**Exam {exam.upper()} Statistics**\n"
                  f"Total Correct: {correct}\n"
                  f"Total Attempted: {attempted}\n"
-                 f"Percent Correct: {round(correct / total)}")
+                 f"Percent Correct: {round(correct / total)}"
+                 )
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(StatsCog(bot))
