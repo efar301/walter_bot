@@ -12,8 +12,3 @@ EXAM_CHOICES = [
     app_commands.Choice(name="FAM", value="fam"),
     app_commands.Choice(name="SRM", value="srm"),
 ]
-
-BOOLEAN_CHOICES = [
-    app_commands.Choice(name="True", value=True),
-    app_commands.Choice(name="False", value=False)
-]

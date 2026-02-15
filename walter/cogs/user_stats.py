@@ -5,7 +5,7 @@ from discord import app_commands
 from discord.ext import commands
 
 # todo: create new db function to collect stats per user
-from ..config import GUILD_ID, EXAMS, EXAM_CHOICES, BOOLEAN_CHOICES
+from ..config import GUILD_ID, EXAMS, EXAM_CHOICES
 from ..db import table_exists, fetch_user_topic_stats, fetch_exam_topics, fetch_user_exam_totals, update_user_stat_decay
 
 class StatsCog(commands.Cog):
@@ -71,7 +71,6 @@ class StatsCog(commands.Cog):
     @app_commands.describe(
         value="True or False?",
     )
-    @app_commands.choices(value=BOOLEAN_CHOICES)
     async def statdecay(self, ctx: commands.Context, value: bool):
         await update_user_stat_decay(ctx.author.id, value)
 
