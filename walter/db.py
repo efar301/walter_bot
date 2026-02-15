@@ -9,9 +9,23 @@ async def create_user(user_id: int) -> None:
     async with aiosqlite.connect(DB_PATH) as db:
         created_at = datetime.now(timezone.utc).isoformat()
         await db.execute(
-            "INSERT INTO users (user_id, created_at) VALUES (?, ?)",
-            (user_id, created_at,)
-            )
+            "INSERT INTO users (user_id, stat_decay, created_at) VALUES (?, ?, ?)",
+            (user_id, 0, created_at,)
+        )
+        await db.commit()
+
+# sets user preference for stat_decay
+async def update_user_stat_decay(user_id: int, stat_decay: bool) -> None:
+    updated_val = 1 if stat_decay == True else 0
+    async with aiosqlite.connect(DB_PATH) as db:
+        await db.execute(
+            """
+            UPDATE users
+            SET stat_decay = ?
+            WHERE user_id = ?
+            """,
+            (updated_val, user_id,)
+        )
         await db.commit()
 
 # adds users latest question attempt to a attempts table
@@ -21,7 +35,7 @@ async def add_attempt(user_id: int, exam: str, question_number: int, selected_an
         await db.execute(
             "INSERT OR REPLACE INTO attempts (user_id, exam, question_number, selected_answer, correct, created_at) VALUES (?, ?, ?, ?, ?, ?)",
             (user_id, exam, question_number, selected_answer, correct, created_at,)
-            )
+        )
         await db.commit()
 
 # fetches a question from an exam table

@@ -1,0 +1,71 @@
+question_num,topics
+001,hierarchical clustering
+002,k-means clustering|hierarchical clustering
+003,time series: random walk|time series forecasts: predicted values
+004,time series: random walk|time series forecasts: confidence intervals
+005,principal components (pca) definition & calculation|pca interpretation: variance explained
+006,principal components (pca) definition & calculation|pca interpretation: variance explained
+007,exponential family distributions (glm)|link functions (glm)
+008,bias-variance tradeoff|interpreting regression/glm parameters in context
+009,classification trees|decision trees: fitting to training data
+010,random forests|bagging
+011,predicted values (linear/glm)|model accuracy metrics (general)
+012,bias-variance tradeoff|regularized regression: lasso|bagging
+013,confidence intervals (linear/glm)|prediction intervals (linear/glm)
+014,variable transformations|ordinary least squares (ols) assumptions
+015,k-means clustering
+016,k-means clustering|hierarchical clustering
+017,model accuracy metrics (general)
+019,likelihood ratio test
+020,link functions (glm)
+021,time series: random walk|time series: stationarity
+022,time series: stationarity|time series: random walk
+023,predicted values (linear/glm)|interpreting regression/glm parameters in context
+024,f-tests (linear models)|model accuracy metrics (general)
+025,decision trees: pruning / overfitting control|decision trees: fitting to training data
+026,classification trees|decision trees: fitting to training data
+027,t-tests (linear models)|interpreting regression/glm parameters in context
+028,trees vs linear models: uses/strengths
+030,pca interpretation: loadings|pca interpretation: variance explained
+031,time series: random walk|time series: stationarity
+032,supervised vs unsupervised learning
+033,regression trees
+034,k-means clustering|hierarchical clustering|choosing number of clusters
+035,principal components (pca) definition & calculation|pca interpretation: variance explained
+036,hierarchical clustering|choosing number of clusters
+037,principal components (pca) definition & calculation|pca interpretation: loadings
+038,time series: random walk|time series: stationarity
+039,trees vs linear models: uses/strengths|variable transformations
+040,k-means clustering|hierarchical clustering|choosing number of clusters
+041,random forests|bagging
+042,link functions (glm)|generalized linear models (glms) assumptions
+043,k-means clustering|supervised vs unsupervised learning|choosing number of clusters
+044,f-tests (linear models)
+045,link functions (glm)|interpreting regression/glm parameters in context|predicted values (linear/glm)
+046,exponential smoothing|time series forecasts: predicted values
+047,classification trees|decision trees: fitting to training data
+049,confidence intervals (linear/glm)|prediction intervals (linear/glm)
+050,bias-variance tradeoff|regularized regression: lasso|bagging
+051,regression trees
+052,model diagnostics: quantitative methods
+053,ordinary least squares (ols) assumptions|interpreting regression/glm parameters in context
+054,t-tests (linear models)
+055,time series: random walk|time series forecasts: predicted values
+056,predicted values (linear/glm)|prediction intervals (linear/glm)
+057,regression trees|decision trees: fitting to training data
+058,autoregressive (ar) models
+059,k-means clustering
+060,k-means clustering|choosing number of clusters
+061,aic (linear models)|bic (linear models)
+062,confidence intervals (linear/glm)|t-tests (linear models)
+063,regression trees
+064,autoregressive (ar) models|time series: stationarity
+066,regression trees
+067,likelihood ratio test|interpreting regression/glm parameters in context
+068,boosting|decision trees: fitting to training data
+069,boosting
+070,aic (linear models)
+071,ordinary least squares (ols) assumptions|bias-variance tradeoff|prediction intervals (linear/glm)
+072,interpreting regression/glm parameters in context
+073,decision trees: fitting to training data|decision trees: pruning / overfitting control
+074,random forests

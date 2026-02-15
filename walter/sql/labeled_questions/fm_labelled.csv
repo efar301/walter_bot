@@ -1,0 +1,462 @@
+question_num,topics
+001,force of interest|effective vs nominal rates|rate conversions (mthly/qtrly/etc)
+002,level annuity-due|annuity with payments more/less frequent than compounding|unknown rate (solve for i)
+003,simple interest|rate conversions (mthly/qtrly/etc)
+004,perpetuity|arithmetic increasing annuity|present value / future value
+005,timeline / cashflow diagram interpretation|present value / future value
+006,loan amortization schedule|principal vs interest portion|outstanding balance (retrospective)
+007,bond price / present value|principal vs interest portion
+008,perpetuity|geometric increasing annuity|present value / future value
+009,rate conversions (mthly/qtrly/etc)|accumulation function a(t)|unknown rate (solve for i)
+010,force of interest|present value / future value
+011,perpetuity|geometric increasing annuity
+012,level annuity-immediate|loan amortization schedule|unknown rate (solve for i)
+013,loan amortization schedule|geometric increasing annuity|outstanding balance (prospective)
+014,unknown rate (solve for i)|equation of value
+015,arithmetic increasing annuity|annuity with payments more/less frequent than compounding|rate conversions (mthly/qtrly/etc)
+016,present value / future value|unknown rate (solve for i)|equation of value
+017,continuous annuity|force of interest
+018,bond price / present value|level annuity-immediate
+019,equation of value|unknown payment (solve for x)|present value / future value
+020,perpetuity|present value / future value
+021,rate conversions (mthly/qtrly/etc)|level annuity-immediate|loan payment calculation
+022,accumulation function a(t)|present value / future value
+023,loan amortization schedule|principal vs interest portion
+024,perpetuity|rate conversions (mthly/qtrly/etc)|present value / future value
+025,bond price / present value|immunization (single liability)
+026,geometric increasing annuity|present value / future value
+027,present value / future value|timeline / cashflow diagram interpretation
+028,bond price / present value|spot rates / term structure
+029,bond price / present value|bond yield to maturity (ytm)|spot rates / term structure
+030,duration (macaulay)|bond price / present value
+031,duration (macaulay)|perpetuity
+032,duration (macaulay)|perpetuity|geometric increasing annuity
+033,loan amortization schedule|principal vs interest portion|outstanding balance (prospective)
+034,bond price / present value|portfolio yield / dollar-weighted return (irr)
+035,level annuity-due|perpetuity|rate conversions (mthly/qtrly/etc)
+036,equation of value|annuity with deferral
+037,bond price / present value|cashflow portfolio replication|equation of value
+038,equation of value|level annuity-immediate|present value / future value
+039,asset-liability matching|forward rates|bond price / present value
+040,bond price / present value|bond yield to maturity (ytm)
+041,bond price / present value|bond yield to maturity (ytm)
+042,bond price / present value|bond yield to maturity (ytm)
+043,bond price / present value|bond yield to maturity (ytm)
+044,immunization (single liability)|duration (macaulay)|bond price / present value
+045,present value / future value|geometric increasing annuity|timeline / cashflow diagram interpretation
+046,force of interest|accumulation function a(t)|unknown time (solve for n)
+047,premium/discount amortization|bond price / present value
+048,loan amortization schedule|principal vs interest portion|level annuity-immediate
+049,loan amortization schedule|outstanding balance (prospective)|loan payment calculation
+050,duration (macaulay)
+051,duration (macaulay)|duration (modified)|bond price / present value
+052,spot rates / term structure|forward rates
+053,duration (macaulay)|bond price / present value
+054,cashflow portfolio replication|bond price / present value|equation of value
+055,immunization (single liability)|duration (modified)
+056,immunization (single liability)|equation of value
+057,immunization (single liability)
+058,timeline / cashflow diagram interpretation|immunization (single liability)
+059,bond price / present value|bond yield to maturity (ytm)|rate conversions (mthly/qtrly/etc)
+060,loan payment calculation|refinancing / restructuring|unknown rate (solve for i)
+061,bond price / present value|bond yield to maturity (ytm)|unknown rate (solve for i)
+062,rate conversions (mthly/qtrly/etc)|unknown time (solve for n)
+063,force of interest|accumulation function a(t)
+064,loan amortization schedule|principal vs interest portion|outstanding balance (prospective)
+065,level annuity-due|annuity with payments more/less frequent than compounding|unknown payment (solve for x)
+066,perpetuity|annuity with payments more/less frequent than compounding|present value / future value
+067,unknown payment (solve for x)|equation of value
+068,level annuity-immediate|unknown payment (solve for x)
+069,loan amortization schedule|outstanding balance (prospective)|loan payment calculation
+070,geometric increasing annuity|level annuity-due|equation of value
+071,bond price / present value|rate conversions (mthly/qtrly/etc)
+072,bond price / present value|bond yield to maturity (ytm)
+073,spot rates / term structure|forward rates
+074,present value / future value|geometric increasing annuity|rate conversions (mthly/qtrly/etc)
+075,rate conversions (mthly/qtrly/etc)|unknown time (solve for n)|present value / future value
+076,rate conversions (mthly/qtrly/etc)|effective vs nominal rates
+077,equation of value|rate conversions (mthly/qtrly/etc)|annuity with payments more/less frequent than compounding
+078,timeline / cashflow diagram interpretation|unknown rate (solve for i)|portfolio yield / dollar-weighted return (irr)
+079,level annuity-due|annuity with payments more/less frequent than compounding|rate conversions (mthly/qtrly/etc)
+080,perpetuity|level annuity-due|present value / future value
+081,arithmetic increasing annuity|bond price / present value
+082,arithmetic increasing annuity|annuity with deferral|present value / future value
+083,geometric increasing annuity|level annuity-due
+084,perpetuity|geometric increasing annuity|annuity with payments more/less frequent than compounding
+085,perpetuity|continuous annuity|present value / future value
+086,force of interest|equation of value|present value / future value
+087,balloon / irregular loan payments|loan amortization schedule|equation of value
+088,loan amortization schedule|principal vs interest portion
+089,loan amortization schedule|balloon / irregular loan payments|outstanding balance (retrospective)
+090,loan amortization schedule|loan payment calculation|outstanding balance (retrospective)
+091,cashflow portfolio replication|timeline / cashflow diagram interpretation
+092,loan payment calculation|principal vs interest portion|outstanding balance (retrospective)
+093,bond price / present value|effective vs nominal rates
+094,bond price / present value|portfolio yield / dollar-weighted return (irr)
+095,bond price / present value|bond yield to maturity (ytm)
+096,bond price / present value|geometric increasing annuity|rate conversions (mthly/qtrly/etc)
+097,bond price / present value|book value / balance sheet value|premium/discount amortization
+098,bond price / present value|book value / balance sheet value|outstanding balance (retrospective)
+099,forward rates|spot rates / term structure
+100,duration (macaulay)|level annuity-due
+101,duration (macaulay)
+102,perpetuity|duration (macaulay)|duration (modified)
+103,immunization (single liability)|duration (macaulay)|duration (modified)
+104,present value / future value|duration (macaulay)|immunization (single liability)
+105,immunization (single liability)
+106,immunization (multiple liabilities)
+107,immunization (multiple liabilities)
+108,immunization (single liability)|duration (macaulay)|convexity
+109,cashflow portfolio replication|bond price / present value|timeline / cashflow diagram interpretation
+110,asset-liability matching|cashflow portfolio replication|bond price / present value
+111,perpetuity|unknown time (solve for n)|present value / future value
+112,simple interest|force of interest
+113,present value / future value|perpetuity|arithmetic increasing annuity
+114,annuity with payments more/less frequent than compounding|unknown payment (solve for x)|rate conversions (mthly/qtrly/etc)
+115,continuous annuity|present value / future value
+116,annuity with deferral|annuity with payments more/less frequent than compounding
+117,level annuity-immediate|perpetuity
+118,rate conversions (mthly/qtrly/etc)|arithmetic increasing annuity|present value / future value
+119,perpetuity|annuity with payments more/less frequent than compounding|present value / future value
+120,arithmetic increasing annuity|perpetuity
+121,geometric increasing annuity|perpetuity
+122,perpetuity|level annuity-due|geometric increasing annuity
+123,perpetuity|force of interest|geometric increasing annuity
+124,present value / future value|equation of value|timeline / cashflow diagram interpretation
+125,loan amortization schedule|principal vs interest portion|loan payment calculation
+126,balloon / irregular loan payments|loan amortization schedule|outstanding balance (retrospective)
+127,unknown payment (solve for x)|equation of value
+128,outstanding balance (prospective)
+129,loan amortization schedule|principal vs interest portion|loan payment calculation
+130,level annuity-immediate|timeline / cashflow diagram interpretation
+131,loan amortization schedule|principal vs interest portion|rate conversions (mthly/qtrly/etc)
+132,loan amortization schedule|principal vs interest portion|outstanding balance (prospective)
+133,loan payment calculation|refinancing / restructuring|outstanding balance (retrospective)
+134,loan amortization schedule|loan payment calculation|outstanding balance (retrospective)
+135,bond price / present value|bond yield to maturity (ytm)
+136,bond price / present value|bond yield to maturity (ytm)
+137,bond price / present value|present value / future value
+138,bond price / present value|premium/discount amortization
+139,bond price / present value|bond yield to maturity (ytm)
+140,bond price / present value|premium/discount amortization|rate conversions (mthly/qtrly/etc)
+141,bond price / present value|equation of value
+142,bond price / present value|bond yield to maturity (ytm)
+143,portfolio yield / dollar-weighted return (irr)|timeline / cashflow diagram interpretation|equation of value
+144,perpetuity|duration (macaulay)
+145,duration (macaulay)|duration (modified)
+146,duration (macaulay)|bond price / present value
+147,immunization (single liability)|convexity|cashflow portfolio replication
+148,immunization (multiple liabilities)|cashflow portfolio replication
+149,duration (modified)|immunization (single liability)
+150,bond price / present value|cashflow portfolio replication|timeline / cashflow diagram interpretation
+151,cashflow portfolio replication|present value / future value|spot rates / term structure
+152,duration (macaulay)|duration (modified)
+153,duration (macaulay)|bond price / present value
+154,duration (macaulay)|duration (modified)
+155,duration (macaulay)|bond price / present value
+156,duration (modified)|present value / future value
+157,cashflow portfolio replication|asset-liability matching
+158,bond price / present value|unknown payment (solve for x)
+159,unknown rate (solve for i)|equation of value
+160,arithmetic increasing annuity|force of interest|present value / future value
+161,loan amortization schedule|principal vs interest portion
+162,equation of value|rate conversions (mthly/qtrly/etc)|timeline / cashflow diagram interpretation
+163,bond price / present value|unknown rate (solve for i)
+164,level annuity-immediate|unknown rate (solve for i)|annuity with payments more/less frequent than compounding
+165,duration (macaulay)|level annuity-due|annuity with deferral
+166,compound interest|rate conversions (mthly/qtrly/etc)|unknown rate (solve for i)
+167,bond price / present value|unknown payment (solve for x)
+168,equation of value|loan amortization schedule|outstanding balance (retrospective)
+169,arithmetic increasing annuity|annuity with payments more/less frequent than compounding|rate conversions (mthly/qtrly/etc)
+170,present value / future value|loan amortization schedule|principal vs interest portion
+171,level annuity-immediate|unknown payment (solve for x)|equation of value
+172,compound interest|effective vs nominal rates
+173,perpetuity|annuity with payments more/less frequent than compounding|present value / future value
+174,perpetuity|arithmetic increasing annuity
+175,level annuity-immediate|perpetuity|equation of value
+176,equation of value|unknown rate (solve for i)
+177,loan amortization schedule|principal vs interest portion
+178,simple interest|level annuity-due
+179,present value / future value|decreasing annuity|unknown payment (solve for x)
+180,present value / future value|level annuity-immediate|timeline / cashflow diagram interpretation
+181,immunization (single liability)|duration (modified)
+182,annuity with payments more/less frequent than compounding|unknown time (solve for n)|timeline / cashflow diagram interpretation
+183,duration (macaulay)
+184,immunization (single liability)
+185,duration (macaulay)
+186,effective vs nominal rates|rate conversions (mthly/qtrly/etc)
+187,loan amortization schedule|outstanding balance (prospective)|unknown time (solve for n)
+188,present value / future value|duration (macaulay)|asset-liability matching
+189,bond price / present value|rate conversions (mthly/qtrly/etc)|present value / future value
+190,loan amortization schedule|principal vs interest portion
+191,loan amortization schedule|outstanding balance (prospective)|equation of value
+192,bond price / present value|cashflow portfolio replication
+193,bond price / present value|cashflow portfolio replication
+194,duration (macaulay)|duration (modified)
+195,perpetuity|duration (modified)
+196,bond price / present value|bond yield to maturity (ytm)
+197,immunization (single liability)
+198,bond yield to maturity (ytm)|bond price / present value|unknown rate (solve for i)
+199,immunization (single liability)|duration (modified)|convexity
+200,continuous annuity|force of interest
+201,perpetuity|geometric increasing annuity|present value / future value
+202,geometric increasing annuity|present value / future value|unknown payment (solve for x)
+203,simple interest|outstanding balance (retrospective)
+204,duration (macaulay)|immunization (single liability)|bond price / present value
+206,bond price / present value|unknown time (solve for n)
+207,simple interest|compound interest|rate conversions (mthly/qtrly/etc)
+208,perpetuity|arithmetic increasing annuity|annuity with payments more/less frequent than compounding
+209,level annuity-due|unknown rate (solve for i)
+210,loan payment calculation|present value / future value
+211,level annuity-due|perpetuity|rate conversions (mthly/qtrly/etc)
+212,outstanding balance (retrospective)
+213,bond price / present value|bond yield to maturity (ytm)|effective vs nominal rates
+214,force of interest|rate conversions (mthly/qtrly/etc)|unknown time (solve for n)
+215,geometric increasing annuity|present value / future value
+216,bond price / present value|premium/discount amortization
+217,arithmetic increasing annuity|perpetuity
+218,outstanding balance (prospective)|loan payment calculation|loan amortization schedule
+219,duration (macaulay)
+220,portfolio yield / dollar-weighted return (irr)
+221,unknown rate (solve for i)|timeline / cashflow diagram interpretation
+222,spot rates / term structure|forward rates
+223,duration (modified)|bond price / present value
+224,spot rates / term structure|cashflow portfolio replication
+225,present value / future value|spot rates / term structure
+226,bond price / present value|bond yield to maturity (ytm)
+227,duration (macaulay)|duration (modified)
+228,duration (macaulay)
+229,immunization (single liability)
+230,loan payment calculation|portfolio yield / dollar-weighted return (irr)
+231,loan payment calculation|level annuity-immediate|unknown payment (solve for x)
+232,outstanding balance (prospective)|balloon / irregular loan payments
+233,equation of value|level annuity-due|present value / future value
+234,bond price / present value|unknown payment (solve for x)
+235,bond price / present value
+236,perpetuity|geometric increasing annuity|present value / future value
+237,perpetuity|geometric increasing annuity
+238,perpetuity|arithmetic increasing annuity
+239,bond price / present value|unknown payment (solve for x)
+240,immunization (single liability)|bond price / present value
+241,unknown rate (solve for i)|equation of value
+242,perpetuity|annuity with deferral|spot rates / term structure
+243,loan amortization schedule|refinancing / restructuring|unknown time (solve for n)
+244,arithmetic increasing annuity|unknown payment (solve for x)
+245,geometric increasing annuity|present value / future value
+246,loan amortization schedule|principal vs interest portion|outstanding balance (prospective)
+247,simple interest|compound interest|present value / future value
+248,bond price / present value|premium/discount amortization|book value / balance sheet value
+249,present value / future value|duration (macaulay)|asset-liability matching
+250,level annuity-immediate|loan amortization schedule|unknown rate (solve for i)
+251,loan amortization schedule|principal vs interest portion|rate conversions (mthly/qtrly/etc)
+252,force of interest|unknown rate (solve for i)|present value / future value
+253,level annuity-immediate|perpetuity|present value / future value
+254,unknown rate (solve for i)|arithmetic increasing annuity|perpetuity
+255,level annuity-immediate|present value / future value
+256,loan amortization schedule|principal vs interest portion|loan payment calculation
+257,present value / future value|unknown rate (solve for i)
+258,bond price / present value|unknown time (solve for n)
+259,arithmetic increasing annuity|geometric increasing annuity|equation of value
+260,duration (macaulay)
+261,level annuity-immediate|equation of value|unknown payment (solve for x)
+262,arithmetic increasing annuity|annuity with deferral|present value / future value
+263,bond price / present value|bond yield to maturity (ytm)|unknown time (solve for n)
+264,bond price / present value|rate conversions (mthly/qtrly/etc)
+265,rate conversions (mthly/qtrly/etc)|effective vs nominal rates
+266,present value / future value|bond price / present value|accumulation function a(t)
+267,loan payment calculation|outstanding balance (prospective)
+268,convexity|immunization (single liability)
+269,bond price / present value|bond yield to maturity (ytm)|rate conversions (mthly/qtrly/etc)
+270,immunization (single liability)|cashflow portfolio replication|bond price / present value
+271,bond price / present value|bond yield to maturity (ytm)
+272,balloon / irregular loan payments|loan amortization schedule|timeline / cashflow diagram interpretation
+273,bond price / present value|bond yield to maturity (ytm)
+274,cashflow portfolio replication|asset-liability matching
+275,immunization (single liability)
+276,perpetuity|arithmetic increasing annuity|present value / future value
+277,geometric increasing annuity|unknown payment (solve for x)
+278,level annuity-immediate|annuity with payments more/less frequent than compounding|present value / future value
+279,loan amortization schedule|principal vs interest portion
+280,level annuity-due|accumulation function a(t)
+281,bond price / present value|book value / balance sheet value|premium/discount amortization
+282,loan amortization schedule|principal vs interest portion|unknown rate (solve for i)
+283,equation of value|unknown rate (solve for i)
+284,effective vs nominal rates|unknown rate (solve for i)
+285,level annuity-due|rate conversions (mthly/qtrly/etc)|present value / future value
+286,perpetuity|annuity with payments more/less frequent than compounding|level annuity-due
+287,decreasing annuity|rate conversions (mthly/qtrly/etc)|outstanding balance (retrospective)
+288,loan amortization schedule|outstanding balance (prospective)|loan payment calculation
+289,level annuity-immediate|unknown rate (solve for i)|loan amortization schedule
+290,bond price / present value|bond yield to maturity (ytm)
+291,unknown rate (solve for i)|rate conversions (mthly/qtrly/etc)
+292,bond price / present value|bond yield to maturity (ytm)
+293,duration (modified)
+294,spot rates / term structure|forward rates
+295,duration (modified)|convexity|immunization (single liability)
+296,unknown time (solve for n)|outstanding balance (retrospective)
+297,bond price / present value|bond yield to maturity (ytm)
+298,perpetuity|geometric increasing annuity
+299,immunization (single liability)
+300,loan amortization schedule|loan payment calculation
+301,bond price / present value
+302,geometric increasing annuity|present value / future value
+303,force of interest|present value / future value
+304,immunization (single liability)|timeline / cashflow diagram interpretation
+305,rate conversions (mthly/qtrly/etc)|annuity with deferral|unknown time (solve for n)
+306,immunization (single liability)|present value / future value|bond price / present value
+307,immunization (single liability)|bond price / present value
+308,cashflow portfolio replication|bond price / present value|timeline / cashflow diagram interpretation
+309,level annuity-immediate|perpetuity|geometric increasing annuity
+310,perpetuity|present value / future value
+311,equation of value|rate conversions (mthly/qtrly/etc)|timeline / cashflow diagram interpretation
+312,force of interest|accumulation function a(t)
+313,perpetuity|geometric increasing annuity
+314,equation of value|unknown payment (solve for x)|rate conversions (mthly/qtrly/etc)
+315,bond price / present value|bond yield to maturity (ytm)|unknown payment (solve for x)
+316,present value / future value|perpetuity|arithmetic increasing annuity
+317,bond price / present value|unknown rate (solve for i)
+318,bond price / present value|premium/discount amortization
+319,bond price / present value|unknown time (solve for n)
+320,duration (macaulay)|duration (modified)
+321,rate conversions (mthly/qtrly/etc)|force of interest|accumulation function a(t)
+322,level annuity-immediate|perpetuity
+323,geometric increasing annuity|outstanding balance (retrospective)|loan amortization schedule
+324,force of interest
+325,bond price / present value|bond yield to maturity (ytm)
+326,bond price / present value|premium/discount amortization
+327,present value / future value|level annuity-immediate|effective vs nominal rates
+328,level annuity-immediate|present value / future value|rate conversions (mthly/qtrly/etc)
+329,geometric increasing annuity|principal vs interest portion|loan amortization schedule
+330,force of interest|unknown payment (solve for x)
+331,spot rates / term structure|unknown rate (solve for i)|equation of value
+332,level annuity-due|unknown payment (solve for x)
+333,immunization (single liability)|duration (macaulay)|convexity
+334,level annuity-due|unknown rate (solve for i)
+335,bond price / present value|bond yield to maturity (ytm)
+336,level annuity-immediate|accumulation function a(t)|timeline / cashflow diagram interpretation
+337,loan amortization schedule|balloon / irregular loan payments
+338,immunization (single liability)
+339,immunization (single liability)
+340,geometric increasing annuity|bond price / present value
+341,perpetuity|force of interest|geometric increasing annuity
+342,force of interest|equation of value|annuity with payments more/less frequent than compounding
+343,bond price / present value|unknown rate (solve for i)
+344,asset-liability matching|cashflow portfolio replication
+345,bond price / present value|unknown time (solve for n)|rate conversions (mthly/qtrly/etc)
+346,bond price / present value|cashflow portfolio replication
+347,force of interest|present value / future value|timeline / cashflow diagram interpretation
+348,geometric increasing annuity|present value / future value
+349,force of interest|rate conversions (mthly/qtrly/etc)
+350,duration (macaulay)|bond price / present value
+351,equation of value|outstanding balance (prospective)
+352,bond price / present value|bond yield to maturity (ytm)
+353,duration (macaulay)|bond price / present value
+354,duration (macaulay)
+355,perpetuity|arithmetic increasing annuity
+356,force of interest|rate conversions (mthly/qtrly/etc)|present value / future value
+357,level annuity-due|annuity with payments more/less frequent than compounding|unknown payment (solve for x)
+358,unknown rate (solve for i)
+359,perpetuity|arithmetic increasing annuity
+360,perpetuity|rate conversions (mthly/qtrly/etc)|geometric increasing annuity
+361,perpetuity|annuity with deferral
+362,level annuity-due|unknown rate (solve for i)|timeline / cashflow diagram interpretation
+363,level annuity-due|accumulation function a(t)
+364,loan amortization schedule|principal vs interest portion
+365,force of interest|effective vs nominal rates|unknown rate (solve for i)
+366,level annuity-due|accumulation function a(t)|perpetuity
+367,annuity with payments more/less frequent than compounding|level annuity-due|unknown payment (solve for x)
+368,loan amortization schedule|principal vs interest portion|outstanding balance (prospective)
+369,loan payment calculation|outstanding balance (prospective)|principal vs interest portion
+370,rate conversions (mthly/qtrly/etc)|unknown rate (solve for i)
+371,spot rates / term structure
+372,duration (macaulay)
+373,loan amortization schedule|outstanding balance (prospective)|unknown time (solve for n)
+374,loan payment calculation|unknown time (solve for n)
+375,duration (macaulay)|duration (modified)
+376,duration (macaulay)|duration (modified)
+377,unknown time (solve for n)|loan payment calculation|equation of value
+378,bond price / present value|bond yield to maturity (ytm)
+379,equation of value|present value / future value
+380,outstanding balance (prospective)
+381,bond yield to maturity (ytm)|bond price / present value
+382,immunization (single liability)
+383,duration (macaulay)|duration (modified)
+384,bond price / present value|premium/discount amortization
+385,bond price / present value|unknown payment (solve for x)
+386,geometric increasing annuity|rate conversions (mthly/qtrly/etc)|annuity with deferral
+387,perpetuity|duration (macaulay)|duration (modified)
+388,equation of value|level annuity-immediate|rate conversions (mthly/qtrly/etc)
+389,level annuity-immediate|duration (modified)|duration (macaulay)
+390,convexity|perpetuity|geometric increasing annuity
+391,equation of value|unknown rate (solve for i)|timeline / cashflow diagram interpretation
+392,level annuity-due|unknown rate (solve for i)
+393,perpetuity|unknown rate (solve for i)|present value / future value
+394,force of interest|effective vs nominal rates
+395,perpetuity|arithmetic increasing annuity
+396,perpetuity|rate conversions (mthly/qtrly/etc)
+397,equation of value|timeline / cashflow diagram interpretation
+398,perpetuity|arithmetic increasing annuity|decreasing annuity
+399,bond price / present value|portfolio yield / dollar-weighted return (irr)
+400,loan payment calculation|portfolio yield / dollar-weighted return (irr)
+401,loan amortization schedule|principal vs interest portion
+402,effective vs nominal rates|unknown rate (solve for i)
+403,rate conversions (mthly/qtrly/etc)|effective vs nominal rates|unknown rate (solve for i)
+404,bond yield to maturity (ytm)|spot rates / term structure|bond price / present value
+405,geometric increasing annuity|principal vs interest portion
+406,effective vs nominal rates|unknown rate (solve for i)
+407,loan amortization schedule|rate conversions (mthly/qtrly/etc)|loan payment calculation
+408,spot rates / term structure|present value / future value|level annuity-immediate
+409,duration (macaulay)
+410,effective vs nominal rates|compound interest
+411,perpetuity|duration (modified)|duration (macaulay)
+412,duration (macaulay)|level annuity-immediate
+413,loan amortization schedule|outstanding balance (retrospective)
+414,present value / future value|effective vs nominal rates
+415,present value / future value|level annuity-immediate|level annuity-due
+416,bond price / present value|bond yield to maturity (ytm)
+417,bond price / present value|bond yield to maturity (ytm)
+418,equation of value|unknown payment (solve for x)|annuity with payments more/less frequent than compounding
+419,unknown rate (solve for i)|bond price / present value|unknown payment (solve for x)
+420,perpetuity|geometric increasing annuity
+421,bond price / present value|premium/discount amortization
+422,level annuity-immediate|level annuity-due|unknown payment (solve for x)
+423,duration (macaulay)|duration (modified)
+424,perpetuity|unknown payment (solve for x)
+425,immunization (single liability)|duration (macaulay)|present value / future value
+426,immunization (single liability)|duration (macaulay)
+427,bond price / present value|bond yield to maturity (ytm)
+428,perpetuity|present value / future value
+429,duration (modified)
+430,bond price / present value|bond yield to maturity (ytm)
+431,bond price / present value|premium/discount amortization
+432,immunization (single liability)|duration (macaulay)|convexity
+433,outstanding balance (prospective)|loan amortization schedule
+434,bond price / present value|rate conversions (mthly/qtrly/etc)
+435,bond price / present value|bond yield to maturity (ytm)
+436,perpetuity|arithmetic increasing annuity|present value / future value
+437,bond price / present value|book value / balance sheet value|premium/discount amortization
+438,equation of value|unknown payment (solve for x)
+439,refinancing / restructuring|outstanding balance (retrospective)|loan payment calculation
+440,perpetuity|duration (modified)
+441,perpetuity|annuity with payments more/less frequent than compounding|rate conversions (mthly/qtrly/etc)
+442,force of interest|effective vs nominal rates
+443,geometric increasing annuity|level annuity-due|unknown payment (solve for x)
+444,bond price / present value|rate conversions (mthly/qtrly/etc)|annuity with payments more/less frequent than compounding
+445,bond price / present value|duration (modified)
+446,arithmetic increasing annuity|level annuity-due|rate conversions (mthly/qtrly/etc)
+447,perpetuity|duration (macaulay)|duration (modified)
+448,premium/discount amortization|book value / balance sheet value|bond price / present value
+449,bond price / present value|premium/discount amortization|book value / balance sheet value
+450,immunization (multiple liabilities)
+451,geometric increasing annuity|annuity with deferral|timeline / cashflow diagram interpretation
+452,unknown rate (solve for i)|timeline / cashflow diagram interpretation|equation of value
+453,bond price / present value|book value / balance sheet value|premium/discount amortization
+454,bond yield to maturity (ytm)|unknown rate (solve for i)
+455,bond price / present value|annuity with payments more/less frequent than compounding|rate conversions (mthly/qtrly/etc)
+456,premium/discount amortization|bond price / present value|outstanding balance (retrospective)
+457,bond price / present value|book value / balance sheet value|unknown time (solve for n)
+458,duration (modified)|timeline / cashflow diagram interpretation
+459,perpetuity|duration (modified)
+460,perpetuity|duration (modified)|bond price / present value
+461,perpetuity|geometric increasing annuity|duration (macaulay)
+462,loan amortization schedule|outstanding balance (prospective)

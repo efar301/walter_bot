@@ -1,0 +1,158 @@
+topic,exam
+sets/events,p
+counting,p
+conditional probability,p
+bayes,p
+independence,p
+common discrete/continuous distributions, p
+cdf/pdf,p
+moments,p
+insurance-style loss adjustments (deductibles/limits),p
+sums of independent r.v.’s,p
+joint/marginal/conditional (discrete),p
+covariance/correlation, p
+order statistics,p
+linear combinations (normal),p
+clt,p
+simple interest,fm
+compound interest,fm
+effective vs nominal rates,fm
+force of interest,fm
+rate conversions (mthly/qtrly/etc),fm
+accumulation function a(t),fm
+present value / future value,fm
+equation of value,fm
+unknown time (solve for n),fm
+unknown rate (solve for i),fm
+unknown payment (solve for x),fm
+timeline / cashflow diagram interpretation,fm
+level annuity-immediate,fm
+level annuity-due,fm
+perpetuity,fm
+arithmetic increasing annuity,fm
+geometric increasing annuity,fm
+decreasing annuity,fm
+continuous annuity,fm
+annuity with deferral,fm
+annuity with payments more/less frequent than compounding,fm
+loan amortization schedule,fm
+loan payment calculation,fm
+outstanding balance (prospective),fm
+outstanding balance (retrospective),fm
+principal vs interest portion,fm
+sinking fund,fm
+balloon / irregular loan payments,fm
+refinancing / restructuring,fm
+bond price / present value,fm
+bond yield to maturity (ytm),fm
+premium/discount amortization,fm
+book value / balance sheet value,fm
+duration (macaulay),fm
+duration (modified),fm
+convexity,fm
+immunization (single liability),fm
+immunization (multiple liabilities),fm
+asset-liability matching,fm
+portfolio yield / dollar-weighted return (irr),fm
+time-weighted return,fm
+spot rates / term structure,fm
+forward rates,fm
+arbitrage pricing with spot/forward,fm
+cashflow portfolio replication,fm
+set functions; axioms of probability,p
+sample space and events,p
+venn diagrams,p
+addition rule; multiplication rule,p
+mutually exclusive events,p
+independent events,p
+conditional probability,p
+law of total probability,p
+bayes theorem,p
+counting: permutations,p
+counting: combinations,p
+random variables (discrete vs continuous),p
+pmf; pdf,p
+cdf,p
+expected value; moments,p
+mode; median; percentiles,p
+variance; standard deviation,p
+coefficient of variation,p
+bernoulli distribution,p
+binomial distribution,p
+geometric distribution,p
+hypergeometric distribution,p
+negative binomial distribution,p
+poisson distribution,p
+(discrete) uniform distribution,p
+(continuous) uniform distribution,p
+exponential distribution,p
+gamma distribution,p
+beta distribution,p
+normal distribution,p
+insurance payments: deductible,p
+insurance payments: coinsurance,p
+insurance payments: benefit limits,p
+insurance payments: inflation adjustments,p
+loss r.v. vs payment r.v. (limited loss),p
+e/var/sd of loss and payment r.v.,p
+joint pmf; joint cdf (discrete),p
+marginal distributions (discrete),p
+conditional distributions (discrete),p
+moments of joint/marginal/conditional (discrete),p
+variance/sd of marginal/conditional (discrete),p
+covariance,p
+correlation,p
+order statistics (joint distribution),p
+linear combinations of independent discrete r.v.’s,p
+linear combinations of independent normal r.v.’s,p
+clt approximations for sums/linear combinations,p
+supervised vs unsupervised learning,srm
+regression vs classification,srm
+model accuracy metrics (general),srm
+bias-variance tradeoff,srm
+training vs test split,srm
+k-fold cross-validation,srm
+leave-one-out cross-validation (loocv),srm
+ordinary least squares (ols) assumptions,srm
+generalized linear models (glms) assumptions,srm
+exponential family distributions (glm),srm
+link functions (glm),srm
+interpreting regression/glm parameters in context,srm
+model diagnostics: graphical methods,srm
+model diagnostics: quantitative methods,srm
+variable transformations,srm
+interaction terms,srm
+t-tests (linear models),srm
+f-tests (linear models),srm
+aic (linear models),srm
+bic (linear models),srm
+likelihood ratio test,srm
+predicted values (linear/glm),srm
+confidence intervals (linear/glm),srm
+prediction intervals (linear/glm),srm
+regularized regression: ridge,srm
+regularized regression: lasso,srm
+k-nearest neighbors (knn),srm
+time series: random walk,srm
+time series: stationarity,srm
+time series: autocorrelation,srm
+exponential smoothing,srm
+autoregressive (ar) models,srm
+arch models,srm
+time series forecasts: predicted values,srm
+time series forecasts: confidence intervals,srm
+decision trees: fitting to training data,srm
+decision trees: pruning / overfitting control,srm
+classification trees,srm
+regression trees,srm
+bagging,srm
+boosting,srm
+random forests,srm
+tree model hyperparameters,srm
+trees vs linear models: uses/strengths,srm
+principal components (pca) definition & calculation,srm
+pca interpretation: loadings,srm
+pca interpretation: variance explained,srm
+k-means clustering,srm
+hierarchical clustering,srm
+choosing number of clusters,srm
