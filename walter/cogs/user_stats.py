@@ -12,14 +12,14 @@ class StatsCog(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
 
-    @commands.hybrid_command(name="userstat", description="Get statisctics for a specific user")
+    @commands.hybrid_command(name="userstats", description="Get statisctics for a specific user")
     @app_commands.guilds(discord.Object(id=GUILD_ID))
     @app_commands.describe(
         exam="Which exam?",
         topics="Which topics? (leave empty for all)",
     )
     @app_commands.choices(exam=EXAM_CHOICES)
-    async def userstat(self, ctx: commands.Context, exam: str, topics: str | None = None):
+    async def userstats(self, ctx: commands.Context, exam: str, topics: str | None = None):
         exam_key = exam.lower()
         table = EXAMS.get(exam_key)
         if table is None:
@@ -37,7 +37,7 @@ class StatsCog(commands.Cog):
 
         reply = f"**Exam {exam.upper()} Stats**\n"
         for topic_stat in topic_stats:
-            reply += f"**{topic_stat[0].upper()}**: {topic_stat[1]} correct / {topic_stat[2]} attempted | {topic_stat[3]}% correct\n"
+            reply += f"**{topic_stat[0].upper()}**: {topic_stat[1]} correct / {topic_stat[2]} attempted | {topic_stat[3] * 100}% correct\n"
         await ctx.send(reply.strip())
 
     @userstat.autocomplete("topics")
@@ -67,7 +67,7 @@ class StatsCog(commands.Cog):
                  f"**Exam {exam.upper()} Statistics**\n"
                  f"Total Correct: {correct}\n"
                  f"Total Attempted: {attempted}\n"
-                 f"Percent Correct: {round(correct / total, 2)}%"
+                 f"Percent Correct: {round(correct / total, 2) * 100}%"
                  )
 
     @commands.hybrid_command(name="statdecay", description="Enable or disable stat decay (your correctly answered questions become wrong after 30 days)")
