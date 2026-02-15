@@ -63,7 +63,7 @@ class StatsCog(commands.Cog):
                  f"**Exam {exam.upper()} Statistics**\n"
                  f"Total Correct: {correct}\n"
                  f"Total Attempted: {attempted}\n"
-                 f"Percent Correct: {round(correct / total)}"
+                 f"Percent Correct: {round(correct / total, 2)}%"
                  )
 
 async def setup(bot: commands.Bot):
