@@ -21,8 +21,8 @@ class EventsCog(commands.Cog):
     @tasks.loop(minutes=1)
     async def weekly_announcement(self):
         now = dt.datetime.now(tz)
-        if now.weekday() != EVENT_SENT_TIME["weekday"]:
-            return
+        # if now.weekday() != EVENT_SENT_TIME["weekday"]:
+        #     return
         
         channel = self.bot.get_channel(EVENTS_CHANNEL_ID)
         if channel is None:

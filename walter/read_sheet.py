@@ -23,7 +23,7 @@ def read_weekly_events():
     return(valid_events)
 
 async def read_weekly_events_async():
-    return await asyncio.to_thread(read_weekly_events())
+    return await asyncio.to_thread(read_weekly_events)
 
 
 
