@@ -32,14 +32,13 @@ class EventsCog(commands.Cog):
         if len(weekly_events) == 0:
             return
 
-
-        event_word = "Events" if len(weekly_events) > 1 else "Event"
+        event_word = "events" if len(weekly_events) == 1 else "event"
         msg = f"**Hello future actuaries! This week we have {len(weekly_events)} {event_word}!**\n"
 
         for event in weekly_events:
             name, date, time, location, notes = event
             msg += f"\n"
-            msg += f"{name} - {date} at {time}\n"
+            msg += f"{name} - {date} @ {time}\n"
             msg += f"What's happening: {notes}\n"
             msg += f"Location: {location}\n"
         await channel.send(msg)
