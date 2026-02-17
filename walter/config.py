@@ -11,3 +11,9 @@ EXAM_CHOICES = [
     app_commands.Choice(name="FAM", value="fam"),
     app_commands.Choice(name="SRM", value="srm"),
 ]
+
+
+TIMEZONE = "Ameria/Los_Angeles"
+EVENT_SENT_TIME = {"weekday": 0, "hour": 9, "minute": 0}
+EVENTS_CHANNEL_ID = 1467999487380426796
+
