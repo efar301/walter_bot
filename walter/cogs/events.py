@@ -31,7 +31,7 @@ class EventsCog(commands.Cog):
         weekly_events = await read_weekly_events_async()
 
 
-        msg = f"**Hello future actuaries! This week we have {len(weekly_events)}!**\n"
+        msg = f"**Hello future actuaries! This week we have {len(weekly_events)} Events!**\n"
 
         for event in weekly_events:
             name, date, time, location, notes = event
