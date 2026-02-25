@@ -66,6 +66,9 @@ class EventsCog(commands.Cog):
     @has_any_role_ids(ROLE_IDS["OFFICER"])
     @in_channel(CHANNEL_IDS["AGENDA"])
     async def agenda(self, ctx: commands.Context):
+        # if ctx.interaction:
+        #     await ctx.defer()
+
         agenda = await read_agenda_async()
 
         msg = f"**Upcoming Events**\n"
@@ -73,8 +76,8 @@ class EventsCog(commands.Cog):
         for event in agenda:
             name, date, time, details = event
             
-            at = "@" if time is not "" else ""
-            dash = "-" if date is not "" else ""
+            at = "@" if time != "" else ""
+            dash = "-" if date != "" else ""
 
             msg += f"\n"
             msg += f"**{name}** {dash} {date} {at} {time}\n"
