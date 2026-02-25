@@ -2,12 +2,23 @@ import datetime as dt
 from zoneinfo import ZoneInfo
 
 import discord
+from discord import app_commands
 from discord.ext import commands, tasks
 
-from ..config import EVENTS_CHANNEL_ID, EVENT_SENT_TIME, TIMEZONE
-from ..read_sheet import read_weekly_events_async
+from ..config import CHANNEL_IDS, ROLE_IDS, EVENT_SENT_TIME, TIMEZONE, GUILD_ID
+from ..read_sheet import read_weekly_events_async, read_agenda_async
 
 tz = ZoneInfo(TIMEZONE)
+
+def has_any_role_ids(*role_ids):
+    async def predicate(ctx):
+        return any(role.id in role_ids for role in ctx.author.roles)
+    return commands.check(predicate)
+
+def in_channel(channel_id):
+    async def predicate(ctx):
+        return ctx.channel.id == channel_id
+    return commands.check(predicate)
 
 class EventsCog(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
@@ -17,15 +28,17 @@ class EventsCog(commands.Cog):
     def cog_unload(self) -> None:
         self.weekly_announcement.cancel()
 
+
+
     @tasks.loop(time=dt.time(hour=EVENT_SENT_TIME["hour"], minute=EVENT_SENT_TIME["minute"], tzinfo=tz))
     async def weekly_announcement(self):
         now = dt.datetime.now(tz)
         if now.weekday() != EVENT_SENT_TIME["weekday"]:
             return
         
-        channel = self.bot.get_channel(EVENTS_CHANNEL_ID)
+        channel = self.bot.get_channel(CHANNEL_IDS["EVENTS"])
         if channel is None:
-            channel = await self.bot.fetch_channel(EVENTS_CHANNEL_ID)
+            channel = await self.bot.fetch_channel(CHANNEL_IDS["EVENTS"])
 
         weekly_events = await read_weekly_events_async()
         
@@ -38,7 +51,7 @@ class EventsCog(commands.Cog):
         for event in weekly_events:
             name, date, time, location, notes = event
             msg += f"\n"
-            msg += f"{name} - {date} @ {time}\n"
+            msg += f"**{name}** - {date} @ {time}\n"
             msg += f"What's happening: {notes}\n"
             msg += f"Location: {location}\n"
         await channel.send(msg)
@@ -47,6 +60,28 @@ class EventsCog(commands.Cog):
     @weekly_announcement.before_loop
     async def before_weekly(self):
         await self.bot.wait_until_ready()
+
+    @commands.hybrid_command(name="agenda", description="Get things on officer agenda")
+    @app_commands.guilds(discord.Object(id=GUILD_ID))
+    @has_any_role_ids(ROLE_IDS["OFFICER"])
+    @in_channel(CHANNEL_IDS["AGENDA"])
+    async def agenda(self, ctx: commands.Context):
+        agenda = read_agenda_async()
+
+        msg = f"**Upcoming Events**\n"
+        
+        for event in agenda:
+            name, date, time, details = event
+            
+            at = "@" if time is not "" else ""
+            dash = "-" if date is not "" else ""
+
+            msg += f"\n"
+            msg += f"**{name}** {dash} {date} {at} {time}\n"
+            msg += f"{details}\n"
+
+        await ctx.send(msg)
+
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(EventsCog(bot))

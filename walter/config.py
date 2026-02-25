@@ -4,6 +4,10 @@ from discord import app_commands
 DB_PATH = os.getenv("EXAM_DB_PATH", "../sql/exam_db.sqlite")
 GUILD_ID = int(os.getenv("WALTER_GUILD_ID", "1467999486403018824"))
 
+
+ROLE_IDS = {"OFFICER": 1467999486403018825}
+CHANNEL_IDS = {"EVENTS": 1467999487380426796, "AGENDA": 1476329536793612412}
+
 EXAMS = {"p": "exam_p", "fm": "exam_fm", "fam": "exam_fam", "srm": "exam_srm"}
 EXAM_CHOICES = [
     app_commands.Choice(name="P", value="p"),
@@ -15,5 +19,4 @@ EXAM_CHOICES = [
 
 TIMEZONE = "America/Los_Angeles"
 EVENT_SENT_TIME = {"weekday": 0, "hour": 9, "minute": 0}
-EVENTS_CHANNEL_ID = 1467999487380426796
 
