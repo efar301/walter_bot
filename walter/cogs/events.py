@@ -66,8 +66,8 @@ class EventsCog(commands.Cog):
     @has_any_role_ids(ROLE_IDS["OFFICER"])
     @in_channel(CHANNEL_IDS["AGENDA"])
     async def agenda(self, ctx: commands.Context):
-        # if ctx.interaction:
-        #     await ctx.defer()
+        if ctx.interaction:
+            await ctx.defer()
 
         agenda = await read_agenda_async()
 
