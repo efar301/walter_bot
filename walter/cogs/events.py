@@ -66,7 +66,7 @@ class EventsCog(commands.Cog):
     @has_any_role_ids(ROLE_IDS["OFFICER"])
     @in_channel(CHANNEL_IDS["AGENDA"])
     async def agenda(self, ctx: commands.Context):
-        agenda = read_agenda_async()
+        agenda = await read_agenda_async()
 
         msg = f"**Upcoming Events**\n"
         
