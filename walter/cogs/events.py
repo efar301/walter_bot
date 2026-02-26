@@ -66,8 +66,7 @@ class EventsCog(commands.Cog):
     async def before_weekly(self):
         await self.bot.wait_until_ready()
 
-    #@tasks.loop(time=dt.time(hour=SEND_TIMES["AGENDA"]["hour"], minute=SEND_TIMES["AGENDA"]["minute"], tzinfo=tz))
-    @tasks.loop(seconds=30)
+    @tasks.loop(time=dt.time(hour=SEND_TIMES["AGENDA"]["hour"], minute=SEND_TIMES["AGENDA"]["minute"], tzinfo=tz))
     async def daily_agenda(self):
 
         channel = self.bot.get_channel(CHANNEL_IDS["AGENDA"])
