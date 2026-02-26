@@ -79,7 +79,7 @@ class EventsCog(commands.Cog):
         if len(agenda) == 0:
             return
         
-        msg = f"**Upcoming Events**\n"
+        msg = f"**Things that need to be done:**\n"
         
         for event in agenda:
             name, date, time, details = event
@@ -89,10 +89,10 @@ class EventsCog(commands.Cog):
 
             msg += f"\n"
             msg += f"**{name}** {dash} {date} {at} {time}\n"
-            msg += f"{details}\n"
+            msg += f"{details}"
 
         msg += f"\n"
-        msg += f"<@${ROLE_IDS["OFFICER"]}"
+        msg += f"<@${ROLE_IDS["OFFICER"]}>"
 
         await channel.send(msg)
         return
@@ -116,7 +116,7 @@ class EventsCog(commands.Cog):
             ctx.send("Nothing upcoming soon.")
             return
 
-        msg = f"**Upcoming Events**\n"
+        msg = f"**Things that need to be done:**\n"
         
         for event in agenda:
             name, date, time, details = event
@@ -129,7 +129,7 @@ class EventsCog(commands.Cog):
             msg += f"{details}\n"
 
         # msg += f"\n"
-        # msg += f"<@${ROLE_IDS["OFFICER"]}"
+        # msg += f"<@${ROLE_IDS["OFFICER"]}>"
 
         await ctx.send(msg)
         return
