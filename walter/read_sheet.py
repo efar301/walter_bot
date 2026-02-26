@@ -15,8 +15,10 @@ def read_weekly_events():
     valid_events = []
     curr_date = datetime.now().date()
     for row in row_list:
-        if len(row) < 2:
+        if not row:
             continue
+        if len(row) < 5:
+            row = row + [""] * (5 - len(row))
         try:
             event_date = datetime.strptime(row[1], "%m/%d/%Y").date()
         except ValueError:
@@ -38,8 +40,10 @@ def get_agenda():
     valid_agenda = []
     curr_date = datetime.now().date()
     for row in row_list:
-        if len(row) < 1:
+        if not row:
             continue
+        if len(row) < 4:
+            row = row + [""] * (4 - len(row))
     
         try:
             event_date = datetime.strptime(row[1], "%m/%d/%Y").date()
