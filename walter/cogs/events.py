@@ -92,7 +92,7 @@ class EventsCog(commands.Cog):
             msg += f"{details}"
 
         msg += f"\n"
-        msg += f"<@${ROLE_IDS["OFFICER"]}>"
+        msg += f"<@&{ROLE_IDS["OFFICER"]}>"
 
         await channel.send(msg)
         return
@@ -129,7 +129,7 @@ class EventsCog(commands.Cog):
             msg += f"{details}\n"
 
         # msg += f"\n"
-        # msg += f"<@${ROLE_IDS["OFFICER"]}>"
+        # msg += f"<@&{ROLE_IDS["OFFICER"]}>"
 
         await ctx.send(msg)
         return
