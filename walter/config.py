@@ -18,5 +18,8 @@ EXAM_CHOICES = [
 
 
 TIMEZONE = "America/Los_Angeles"
-EVENT_SENT_TIME = {"weekday": 0, "hour": 9, "minute": 0}
 
+SEND_TIMES = {
+    "EVENTS": {"weekday": 0, "hour": 9, "minute": 0},
+    "AGENDA": {"hour": 9, "minute": 0}
+}
