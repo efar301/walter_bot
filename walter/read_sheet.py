@@ -35,22 +35,24 @@ def get_agenda():
     gc = gspread.service_account(filename=os.environ["GOOGLE_SHEETS_JSON_DIR"])
     sheet = gc.open_by_key(os.environ["GOOGLE_SHEETS_KEY"]).worksheet("Agenda")
 
-    row_list = sheet.batch_get(["A2:D100"])[0]
+    row_list = sheet.batch_get(["A2:F100"])[0]
 
     valid_agenda = []
     curr_date = datetime.now().date()
     for row in row_list:
         if not row:
             continue
-        if len(row) < 4:
-            row = row + [""] * (4 - len(row))
+        # Pad missing cells so optional fields (time/details/status) don't drop the row.
+        if len(row) < 6:
+            row = row + [""] * (6 - len(row))
     
         try:
             event_date = datetime.strptime(row[1], "%m/%d/%Y").date()
         except ValueError:
             continue
 
-        if curr_date - timedelta(days=7) <= event_date <= curr_date + timedelta(days=30):
+        status = row[5].strip().lower()
+        if curr_date - timedelta(days=7) <= event_date <= curr_date + timedelta(days=30) and status != "incomplete":
             valid_agenda.append(row)
 
     return valid_agenda

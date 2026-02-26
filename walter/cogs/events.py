@@ -81,7 +81,7 @@ class EventsCog(commands.Cog):
         msg = f"**Things that need to be done:**\n"
         
         for event in agenda:
-            name, date, time, details = event
+            name, date, time, details = event[:4]
             
             at = "@" if time != "" else ""
             dash = "-" if date != "" else ""
@@ -118,7 +118,7 @@ class EventsCog(commands.Cog):
         msg = f"**Things that need to be done:**\n"
         
         for event in agenda:
-            name, date, time, details = event
+            name, date, time, details = event[:4]
             
             at = "@" if time != "" else ""
             dash = "-" if date != "" else ""
