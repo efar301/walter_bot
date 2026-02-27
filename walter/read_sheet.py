@@ -42,7 +42,7 @@ def get_agenda():
     for row in row_list:
         if not row:
             continue
-        # Pad missing cells so optional fields (time/details/status) don't drop the row.
+
         if len(row) < 6:
             row = row + [""] * (6 - len(row))
     
@@ -51,8 +51,8 @@ def get_agenda():
         except ValueError:
             continue
 
-        status = row[5].strip().lower()
-        if curr_date - timedelta(days=7) <= event_date <= curr_date + timedelta(days=30) and status != "incomplete":
+        status = row[4].strip().lower()
+        if curr_date - timedelta(days=7) <= event_date <= curr_date + timedelta(days=30) and status != "complete":
             valid_agenda.append(row)
 
     return valid_agenda
