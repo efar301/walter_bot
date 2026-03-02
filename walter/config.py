@@ -1,7 +1,7 @@
 import os
 from discord import app_commands
 
-DB_PATH = os.getenv("EXAM_DB_PATH", "../sql/exam_db.sqlite")
+DB_PATH = os.getenv("DB_DIRECTORY")
 GUILD_ID = int(os.getenv("WALTER_GUILD_ID", "1467999486403018824"))
 
 
@@ -15,7 +15,6 @@ EXAM_CHOICES = [
     app_commands.Choice(name="FAM", value="fam"),
     app_commands.Choice(name="SRM", value="srm"),
 ]
-
 
 TIMEZONE = "America/Los_Angeles"
 
