@@ -1,7 +1,7 @@
 import os
 from discord import app_commands
 
-DB_PATH = os.getenv("DB_DIRECTORY")
+DB_PATH = os.getenv("DOCKER_DB_DIRECTORY")
 GUILD_ID = int(os.getenv("WALTER_GUILD_ID", "1467999486403018824"))
 
 
