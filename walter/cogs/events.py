@@ -6,7 +6,7 @@ from discord import app_commands
 from discord.ext import commands, tasks
 
 from ..config import CHANNEL_IDS, ROLE_IDS, SEND_TIMES, TIMEZONE, GUILD_ID
-from ..read_sheet import read_weekly_events_async, read_agenda_async
+from ..sheet_functions import read_weekly_events_async, read_agenda_async
 
 tz = ZoneInfo(TIMEZONE)
 

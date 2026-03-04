@@ -8,7 +8,7 @@ class WalterBot(commands.Bot):
     async def setup_hook(self) -> None:
         await self.load_extension("walter.cogs.exams")
         await self.load_extension("walter.cogs.help")
-        await self.load_extension("walter.cogs.user_stats")
+        await self.load_extension("walter.cogs.user")
         await self.load_extension("walter.cogs.events")
 
         from .config import GUILD_ID

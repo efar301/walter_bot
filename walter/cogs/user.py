@@ -7,6 +7,7 @@ from discord.ext import commands
 # todo: create new db function to collect stats per user
 from ..config import GUILD_ID, EXAMS, EXAM_CHOICES
 from ..db import table_exists, fetch_user_topic_stats, fetch_exam_topics, fetch_user_exam_totals, update_user_stat_decay
+from ..sheet_functions import write_question_async
 
 class StatsCog(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
@@ -80,7 +81,23 @@ class StatsCog(commands.Cog):
         await update_user_stat_decay(ctx.author.id, value)
         await ctx.send(f"Stat decay set to {value}.", ephemeral=True)
 
-    
+
+
+    @commands.hybrid_command(name="question_help", description="Tell us a specific question you want us to specifically " \
+    "cover for our next meeting (Mainly SOA exam questions but you can put your name and give us a question during the meeting)")
+    @app_commands.guilds(discord.Object(id=GUILD_ID))
+    @app_commands.describe(
+        exam="Which exam?",
+        question_number="Question Number",
+        name="Your name"
+    )
+    @app_commands.choices(exam=EXAM_CHOICES)
+    async def question_help(self, ctx: commands.Context, exam: str, question_number: int, name: str):
+        sheet_name = f"{exam} Study Calendar"
+        appended_question = f"Question {question_number} ({name})"
+
+        await write_question_async(sheet_name, appended_question)
+        await ctx.send("Question submitted, thanks!", ephemeral=True)
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(StatsCog(bot))
