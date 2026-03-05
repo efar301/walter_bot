@@ -9,7 +9,7 @@ from ..config import GUILD_ID, EXAMS, EXAM_CHOICES
 from ..db import table_exists, fetch_user_topic_stats, fetch_exam_topics, fetch_user_exam_totals, update_user_stat_decay
 from ..sheet_functions import write_question_async
 
-class StatsCog(commands.Cog):
+class UserCog(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
 
@@ -100,4 +100,4 @@ class StatsCog(commands.Cog):
         await ctx.send("Question submitted, thanks!", ephemeral=True)
 
 async def setup(bot: commands.Bot):
-    await bot.add_cog(StatsCog(bot))
+    await bot.add_cog(UserCog(bot))
