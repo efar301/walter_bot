@@ -15,6 +15,11 @@ EXAM_CHOICES = [
     app_commands.Choice(name="FAM", value="fam"),
     app_commands.Choice(name="SRM", value="srm"),
 ]
+STAT_DECAY_CHOICES = [
+    app_commands.Choice(name="Weekly", value="weekly"),
+    app_commands.Choice(name="Biweekly", value="biweekly"),
+    app_commands.Choice(name="Monthly", value="monthly"),
+]
 
 TIMEZONE = "America/Los_Angeles"
 

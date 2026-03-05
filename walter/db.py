@@ -28,6 +28,19 @@ async def update_user_stat_decay(user_id: int, stat_decay: bool) -> None:
         )
         await db.commit()
 
+async def update_user_stat_decay_period(user_id, period: str) -> None:
+    async with aiosqlite.connect(DB_PATH) as db:
+        await db.execute(
+            """
+            UPDATE users
+            SET decay_time = ?
+            WHERE user_id = ?
+            """,
+            (period, user_id,)
+        )
+        await db.commit()
+
+
 # adds users latest question attempt to a attempts table
 async def add_attempt(user_id: int, exam: str, question_number: int, selected_answer: str, correct: int) -> None:
     async with aiosqlite.connect(DB_PATH) as db:
