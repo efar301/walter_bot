@@ -84,7 +84,7 @@ class UserCog(commands.Cog):
 
 
     @commands.hybrid_command(name="question_help", 
-                             description="Request a question for next meeting (use 0 for non‑exam)")
+                             description="Tell us a specific question you want covered next meeting (put 0 if its a non exam question)")
     @app_commands.guilds(discord.Object(id=GUILD_ID))
     @app_commands.describe(
         exam="Which exam?",
@@ -93,7 +93,7 @@ class UserCog(commands.Cog):
     )
     @app_commands.choices(exam=EXAM_CHOICES)
     async def question_help(self, ctx: commands.Context, exam: str, question_number: int, name: str):
-        sheet_name = f"{exam} Study Calendar"
+        sheet_name = f"{exam.upper()} Study Calendar"
         appended_question = f"Question {question_number} ({name})"
 
         await write_question_async(sheet_name, appended_question)
