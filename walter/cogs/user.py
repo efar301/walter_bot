@@ -72,17 +72,17 @@ class UserCog(commands.Cog):
                  f"Percent Correct: {round(correct / total, 2) * 100}%"
                  )
 
-    @commands.hybrid_command(name="statdecay", description="Enable or disable stat decay (your correctly answered questions become wrong after 30 days)")
+    @commands.hybrid_command(name="statdecay", description="Enable or disable stat decay (your correctly answered questions become wrong after a period)")
     @app_commands.guilds(discord.Object(id=GUILD_ID))
     @app_commands.describe(
         value="True or False?",
         period="How often to decay stats"
     )
     @app_commands.choices(period=STAT_DECAY_CHOICES)
-    async def statdecay(self, ctx: commands.Context, value: bool, period=str):
+    async def statdecay(self, ctx: commands.Context, value: bool, period: str):
         await update_user_stat_decay(ctx.author.id, value)
         await update_user_stat_decay(ctx.author.id, period)
-        await ctx.send(f"Stat decay set to {value}.", ephemeral=True)
+        await ctx.send(f"Stat decay set to {value}, decay period is {period}", ephemeral=True)
 
 
 
