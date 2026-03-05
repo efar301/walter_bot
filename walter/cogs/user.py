@@ -83,7 +83,8 @@ class StatsCog(commands.Cog):
 
 
 
-    @commands.hybrid_command(name="question_help", description="Tell us a specific question you want covered next meeting (put 0 if its a non exam question)"
+    @commands.hybrid_command(name="question_help", 
+                             description="Tell us a specific question you want covered next meeting (put 0 if its a non exam question)")
     @app_commands.guilds(discord.Object(id=GUILD_ID))
     @app_commands.describe(
         exam="Which exam?",
