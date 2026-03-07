@@ -125,7 +125,7 @@ class EventsCog(commands.Cog):
 
             msg += f"\n"
             msg += f"**{name}** {dash} {date} {at} {time}\n"
-            msg += f"{details}\n"
+            msg += f"{details}\n" if details else ""
 
         # msg += f"\n"
         # msg += f"<@&{ROLE_IDS["OFFICER"]}>"
