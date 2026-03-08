@@ -20,6 +20,27 @@ def in_channel(channel_id):
         return ctx.channel.id == channel_id
     return commands.check(predicate)
 
+def build_announcement(agenda, ping_officers: bool):
+    msg = f"**Things that need to be done:**\n"
+    
+    for event in agenda:
+        name, date, time, details = event[:4]
+        
+        at = "@" if time != "" else ""
+        dash = "-" if date != "" else ""
+
+        msg += f"\n"
+        msg += f"**{name}** {dash} {date} {at} {time}\n"
+        msg += f"{details}\n" if details else ""
+
+    if ping_officers:
+        msg += f"\n"
+        msg += f"<@&{ROLE_IDS["OFFICER"]}>"
+
+    return msg
+        
+
+
 class EventsCog(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
@@ -77,21 +98,8 @@ class EventsCog(commands.Cog):
         
         if len(agenda) == 0:
             return
-        
-        msg = f"**Things that need to be done:**\n"
-        
-        for event in agenda:
-            name, date, time, details = event[:4]
-            
-            at = "@" if time != "" else ""
-            dash = "-" if date != "" else ""
 
-            msg += f"\n"
-            msg += f"**{name}** {dash} {date} {at} {time}\n"
-            msg += f"{details}"
-
-        msg += f"\n"
-        msg += f"<@&{ROLE_IDS["OFFICER"]}>"
+        msg = build_announcement(agenda, ping_officers=True)
 
         await channel.send(msg)
         return
@@ -115,20 +123,8 @@ class EventsCog(commands.Cog):
             ctx.send("Nothing upcoming soon.")
             return
 
-        msg = f"**Things that need to be done:**\n"
-        
-        for event in agenda:
-            name, date, time, details = event[:4]
-            
-            at = "@" if time != "" else ""
-            dash = "-" if date != "" else ""
+        msg = build_announcement(agenda, ping_officers=False)
 
-            msg += f"\n"
-            msg += f"**{name}** {dash} {date} {at} {time}\n"
-            msg += f"{details}\n" if details else ""
-
-        # msg += f"\n"
-        # msg += f"<@&{ROLE_IDS["OFFICER"]}>"
 
         await ctx.send(msg)
         return
