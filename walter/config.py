@@ -25,5 +25,6 @@ TIMEZONE = "America/Los_Angeles"
 
 SEND_TIMES = {
     "EVENTS": {"weekday": 0, "hour": 9, "minute": 0},
-    "AGENDA": {"hour": 9, "minute": 0}
+    "AGENDA": {"hour": 9, "minute": 0},
+    "QOTD": {"hour": 9, "minute": 0}
 }

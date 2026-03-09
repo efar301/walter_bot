@@ -69,7 +69,7 @@ class EventsCog(commands.Cog):
             return
 
         event_word = "event" if len(weekly_events) == 1 else "events"
-        msg = f"**Hello future actuaries! This week we have {len(weekly_events)} {event_word}!**\n"
+        msg = f"**Hi @everyone! This week we have {len(weekly_events)} {event_word}!**\n"
 
         for event in weekly_events:
             name, date, time, location, notes = event
@@ -78,8 +78,6 @@ class EventsCog(commands.Cog):
             msg += f"What's happening: {notes}\n"
             msg += f"Location: {location}\n"
 
-        msg += f"\n"
-        msg += f"@everyone"
         await channel.send(msg)
         return
 
@@ -128,6 +126,10 @@ class EventsCog(commands.Cog):
 
         await ctx.send(msg)
         return
+    
+    @tasks.loop(time=dt.time(hour=SEND_TIMES["QOTD"]["hour"], minute=SEND_TIMES["QOTD"]["minute"]))
+    async def qotd():
+        pass
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(EventsCog(bot))
