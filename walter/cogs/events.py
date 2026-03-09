@@ -68,7 +68,7 @@ class EventsCog(commands.Cog):
         if len(weekly_events) == 0:
             return
 
-        event_word = "events" if len(weekly_events) == 1 else "event"
+        event_word = "event" if len(weekly_events) == 1 else "events"
         msg = f"**Hello future actuaries! This week we have {len(weekly_events)} {event_word}!**\n"
 
         for event in weekly_events:

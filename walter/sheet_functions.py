@@ -33,7 +33,7 @@ def read_weekly_events():
         event_date = parse_us_date(row[1])
         if event_date is None:
             continue
-        if curr_date <= event_date <= curr_date + timedelta(days=7):
+        if curr_date <= event_date <= curr_date + timedelta(days=6):
             valid_events.append(row)
     
     return valid_events
