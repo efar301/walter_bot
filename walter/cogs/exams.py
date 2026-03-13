@@ -4,17 +4,18 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 
-from ..config import GUILD_ID, EXAMS, EXAM_CHOICES
-from ..db import (
+from ..config import EXAM_CHOICES, EXAMS, GUILD_ID
+from ..postgresdb import (
     add_attempt,
     create_user,
     fetch_by_number,
-    fetch_question_topics,
     fetch_by_topic,
     fetch_exam_topics,
+    fetch_question_topics,
     fetch_random,
     table_exists,
 )
+
 
 class ExamsCog(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
@@ -59,7 +60,9 @@ class ExamsCog(commands.Cog):
             for label in ["A", "B", "C", "D", "E"]:
                 self.add_item(ExamsCog.AnswerButton(label, self))
 
-    @commands.hybrid_command(name="q", description="Get a random or specific exam question.")
+    @commands.hybrid_command(
+        name="q", description="Get a random or specific exam question."
+    )
     @app_commands.guilds(discord.Object(id=GUILD_ID))
     @app_commands.describe(
         exam="Which exam?",
@@ -77,7 +80,11 @@ class ExamsCog(commands.Cog):
             await ctx.send(f"Table `{table}` doesn't exist yet.")
             return
 
-        row = await(fetch_by_number(table, number) if number is not None else fetch_random(table))
+        row = await (
+            fetch_by_number(table, number)
+            if number is not None
+            else fetch_random(table)
+        )
         if row is None:
             await ctx.send("No question found.")
             return
@@ -103,7 +110,9 @@ class ExamsCog(commands.Cog):
             view=view,
         )
 
-    @commands.hybrid_command(name="qt", description="Get a random question by exam topic")
+    @commands.hybrid_command(
+        name="qt", description="Get a random question by exam topic"
+    )
     @app_commands.guilds(discord.Object(id=GUILD_ID))
     @app_commands.describe(
         exam="Which exam?",
@@ -121,20 +130,20 @@ class ExamsCog(commands.Cog):
         if not await table_exists(table):
             await ctx.send(f"Table `{table}` doesn't exist yet.")
             return
-        
+
         row = await fetch_by_topic(table, exam_key, topic)
         if row is None:
             await ctx.send("No question found.")
             return
-        
+
         qnum = int(row["number"])
         img_path = row["question_dir"]
-        ans = str(row['solution']).strip().upper()
+        ans = str(row["solution"]).strip().upper()
 
         if not img_path or not os.path.exists(img_path):
             await ctx.send(f"Exam {table} #{qnum}: image not found at `{img_path}`.")
             return
-        
+
         topics = await fetch_question_topics(exam_key, qnum)
         topics_text = ", ".join(topics) if topics else "none"
 
@@ -161,6 +170,7 @@ class ExamsCog(commands.Cog):
             exam = exam.value
         topics = await fetch_exam_topics(str(exam), current)
         return [app_commands.Choice(name=topic, value=topic) for topic in topics]
+
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(ExamsCog(bot))

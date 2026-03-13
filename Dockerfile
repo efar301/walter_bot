@@ -1,12 +1,12 @@
-FROM python:3.12-slim
+FROM astral/uv:python3.12-bookworm-slim
 
 WORKDIR /bot
 
-COPY requirements.txt .
+COPY pyproject.toml uv.lock ./
 
-RUN pip install  -r requirements.txt
+RUN uv sync --frozen --no-dev
 
 COPY . . 
 
-CMD ["python3", "run_bot.py"]
+CMD ["uv", "run", "run_bot.py"]
 
