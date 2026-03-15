@@ -68,7 +68,7 @@ class UserCog(commands.Cog):
             await ctx.send(f"Table `{table}` doesn't exist yet.")
             return
             
-        topic_stats = await fetch_user_topic_stats(ctx.author.id, exam, topics)
+        topic_stats = await fetch_user_topic_stats(int(ctx.author.id), exam, topics)
         if not topic_stats:
             await ctx.send("No problems attempted for this topic/exam yet.")
             
