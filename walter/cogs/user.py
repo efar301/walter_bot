@@ -30,64 +30,40 @@ class UserCog(commands.Cog):
         topics="Which topics? (leave empty for all)",
     )
     @app_commands.choices(exam=EXAM_CHOICES)
-    # async def userstats(
-    #     self, ctx: commands.Context, exam: str, topics: str | None = None
-    # ):
-    #     exam_key = exam.lower()
-    #     table = EXAMS.get(exam_key)
-    #     if table is None:
-    #         await ctx.send(f"Exam must be one of: {EXAMS.keys()}")
-    #         return
-
-    #     if not await table_exists(table):
-    #         await ctx.send(f"Table `{table}` doesn't exist yet.")
-    #         return
-
-    #     topic_stats = await fetch_user_topic_stats(ctx.author.id, exam, topics)
-    #     if not topic_stats:
-    #         await ctx.send("No problems for this topic attempted yet.")
-    #         return
-
-    #     reply = f"**Exam {exam.upper()} Stats**\n"
-    #     for topic_stat in topic_stats:
-    #         pct = float(topic_stat[3] or 0) * 100
-    #         reply += (
-    #             f"**{topic_stat[0].upper()}**: {topic_stat[1]} correct / {topic_stat[2]} attempted "
-    #             f"| {pct:.2f}% correct\n"
-    #         )
-    #     await ctx.send(reply.strip())
-    async def userstats(self, ctx: commands.Context, exam: str, topics: str | None = None):
+    async def userstats(
+        self, ctx: commands.Context, exam: str, topics: str | None = None
+    ):
         exam_key = exam.lower()
         table = EXAMS.get(exam_key)
-        
+
         if table is None:
             await ctx.send(f"Exam must be one of {EXAMS.keys()}")
             return
-            
+
         if not await table_exists(table):
             await ctx.send(f"Table `{table}` doesn't exist yet.")
             return
-            
-        topic_stats = await fetch_user_topic_stats(int(ctx.author.id), exam, topics)
+
+        topic_stats = await fetch_user_topic_stats(ctx.author.id, exam, topics)
         if not topic_stats:
-            await ctx.send("No problems attempted for this topic/exam yet.")
-            
+            await ctx.send("No problems for this topic attempted yet.")
+            return
+
         embed = discord.Embed(
             title=f"{ctx.author.display_name}'s stats for Exam {exam}",
-            description="Stats are grouped by topic",
             color=discord.Color.blurple(),
         )
-        
+
         for stat in topic_stats:
-            pct = round(stat[3], 3) * 100
+            pct = round(stat[3], 2) * 100
             embed.add_field(
                 name=stat[0].upper(),
-                value=f"\n{stat[1]} correct / {stat[2]} attempted\n{pct} correct",
-                inline=False
+                value=f"\n{stat[1]} correct / {stat[2]} attempted\n{pct}% correct",
+                inline=True,
             )
-        return embed
-        
-        
+        await ctx.send(embed=embed)
+        return
+
 
     @userstats.autocomplete("topics")
     async def userstat_topics_autocomplete(
@@ -113,17 +89,43 @@ class UserCog(commands.Cog):
     @app_commands.choices(exam=EXAM_CHOICES)
     async def mastery(self, ctx: commands.Context, exam: str):
         table = EXAMS.get(exam)
+        
+        if table is None:
+            await ctx.send(f"Exam must be one of {EXAMS.keys()}")
+            return
+            
         correct, attempted, total = await fetch_user_exam_totals(
             ctx.author.id, exam, table
         )
-        await ctx.send(
-            ""
-            f"**Exam {exam.upper()} Statistics**\n"
-            f"Total Correct: {correct}\n"
-            f"Total Attempted: {attempted}\n"
-            f"Total Questions: {total}\n"
-            f"Percent Correct: {round(correct / total, 2) * 100}%"
+        
+        embed = discord.Embed(
+            title=f"{ctx.author.display_name}'s mastery for Exam {exam}",
+            color=discord.Color.blurple()
         )
+        
+        embed.add_field(
+            name="Total Correct",
+            value=f"{correct}",
+            inline=True
+        )
+        embed.add_field(
+            name="Total Attempted",
+            value=f"{attempted}",
+            inline=True
+        )
+        embed.add_field(
+            name="Total Questions in bank",
+            value=f"{total}",
+            inline=True
+        )
+        embed.add_field(
+            name="Percent Correct",
+            value=f"{round(correct / total, 2) * 100}%",
+            inline=True
+        )
+
+        await ctx.send(embed=embed)
+        return
 
     @commands.hybrid_command(
         name="statdecay",

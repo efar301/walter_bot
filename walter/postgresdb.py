@@ -34,10 +34,9 @@ async def _get_pool() -> asyncpg.Pool:
 async def _get_user_id(
     conn: asyncpg.Connection, discord_id: int, create: bool = False
 ) -> Optional[int]:
-    discord_id_str = str(discord_id)
     row = await conn.fetchrow(
         "SELECT id FROM users WHERE discord_id = $1",
-        discord_id_str,
+        discord_id,
     )
     if row:
         return int(row["id"])
@@ -51,7 +50,7 @@ async def _get_user_id(
         ON CONFLICT (discord_id) DO NOTHING
         RETURNING id
         """,
-        discord_id_str,
+        discord_id,
         False,
     )
     if row:
@@ -60,7 +59,7 @@ async def _get_user_id(
     # In case of a race, fetch again.
     row = await conn.fetchrow(
         "SELECT id FROM users WHERE discord_id = $1",
-        discord_id_str,
+        discord_id,
     )
     return int(row["id"]) if row else None
 
@@ -84,10 +83,10 @@ async def create_user(user_id: int) -> None:
 
 
 # sets user preference for stat_decay
-async def update_user_stat_decay(user_id: int, stat_decay: bool) -> None:
+async def update_user_stat_decay(discord_id: int, stat_decay: bool) -> None:
     pool = await _get_pool()
     async with pool.acquire() as conn:
-        await _get_user_id(conn, user_id, create=True)
+        await _get_user_id(conn, discord_id, create=True)
         await conn.execute(
             """
             UPDATE users
@@ -95,14 +94,14 @@ async def update_user_stat_decay(user_id: int, stat_decay: bool) -> None:
             WHERE discord_id = $2
             """,
             bool(stat_decay),
-            str(user_id),
+            discord_id,
         )
 
 
-async def update_user_stat_decay_period(user_id, period: str) -> None:
+async def update_user_stat_decay_period(discord_id, period: str) -> None:
     pool = await _get_pool()
     async with pool.acquire() as conn:
-        await _get_user_id(conn, user_id, create=True)
+        await _get_user_id(conn, discord_id, create=True)
         await conn.execute(
             """
             UPDATE users
@@ -110,7 +109,7 @@ async def update_user_stat_decay_period(user_id, period: str) -> None:
             WHERE discord_id = $2
             """,
             period,
-            str(user_id),
+            discord_id,
         )
 
 
@@ -376,7 +375,7 @@ async def fetch_exam_topics(exam: str, query: str = "", limit: int = 25):
 
 # gets user exam stats per topic
 async def fetch_user_topic_stats(
-    user_id: int,
+    discord_id: int,
     exam: str,
     topics: Optional[Iterable[str] | str] = None,
 ):
@@ -390,11 +389,11 @@ async def fetch_user_topic_stats(
 
     pool = await _get_pool()
     async with pool.acquire() as conn:
-        internal_user_id = await _get_user_id(conn, user_id, create=False)
-        if internal_user_id is None:
+        internal_discord_id = await _get_user_id(conn, discord_id, create=False)
+        if internal_discord_id is None:
             return []
 
-        params: list[object] = [internal_user_id, code]
+        params: list[object] = [internal_discord_id, code]
         topic_filter = ""
         if topic_list:
             placeholders = ", ".join(f"${i}" for i in range(3, 3 + len(topic_list)))
