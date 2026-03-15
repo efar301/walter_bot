@@ -30,32 +30,64 @@ class UserCog(commands.Cog):
         topics="Which topics? (leave empty for all)",
     )
     @app_commands.choices(exam=EXAM_CHOICES)
-    async def userstats(
-        self, ctx: commands.Context, exam: str, topics: str | None = None
-    ):
+    # async def userstats(
+    #     self, ctx: commands.Context, exam: str, topics: str | None = None
+    # ):
+    #     exam_key = exam.lower()
+    #     table = EXAMS.get(exam_key)
+    #     if table is None:
+    #         await ctx.send(f"Exam must be one of: {EXAMS.keys()}")
+    #         return
+
+    #     if not await table_exists(table):
+    #         await ctx.send(f"Table `{table}` doesn't exist yet.")
+    #         return
+
+    #     topic_stats = await fetch_user_topic_stats(ctx.author.id, exam, topics)
+    #     if not topic_stats:
+    #         await ctx.send("No problems for this topic attempted yet.")
+    #         return
+
+    #     reply = f"**Exam {exam.upper()} Stats**\n"
+    #     for topic_stat in topic_stats:
+    #         pct = float(topic_stat[3] or 0) * 100
+    #         reply += (
+    #             f"**{topic_stat[0].upper()}**: {topic_stat[1]} correct / {topic_stat[2]} attempted "
+    #             f"| {pct:.2f}% correct\n"
+    #         )
+    #     await ctx.send(reply.strip())
+    async def userstats(self, ctx: commands.Context, exam: str, topics: str | None = None):
         exam_key = exam.lower()
         table = EXAMS.get(exam_key)
+        
         if table is None:
-            await ctx.send(f"Exam must be one of: {EXAMS.keys()}")
+            await ctx.send(f"Exam must be one of {EXAMS.keys()}")
             return
-
+            
         if not await table_exists(table):
             await ctx.send(f"Table `{table}` doesn't exist yet.")
             return
-
+            
         topic_stats = await fetch_user_topic_stats(ctx.author.id, exam, topics)
         if not topic_stats:
-            await ctx.send("No problems for this topic attempted yet.")
-            return
-
-        reply = f"**Exam {exam.upper()} Stats**\n"
-        for topic_stat in topic_stats:
-            pct = float(topic_stat[3] or 0) * 100
-            reply += (
-                f"**{topic_stat[0].upper()}**: {topic_stat[1]} correct / {topic_stat[2]} attempted "
-                f"| {pct:.2f}% correct\n"
+            await ctx.send("No problems attempted for this topic/exam yet.")
+            
+        embed = discord.Embed(
+            title=f"{ctx.author.display_name}'s stats for Exam {exam}",
+            description="Stats are grouped by topic",
+            color=discord.Color.blurple(),
+        )
+        
+        for stat in topic_stats:
+            pct = round(stat[3], 3) * 100
+            embed.add_field(
+                name=stat[0].upper(),
+                value=f"\n{stat[1]} correct / {stat[2]} attempted\n{pct} correct",
+                inline=False
             )
-        await ctx.send(reply.strip())
+        return embed
+        
+        
 
     @userstats.autocomplete("topics")
     async def userstat_topics_autocomplete(
