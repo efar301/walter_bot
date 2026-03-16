@@ -93,7 +93,7 @@ class UserCog(commands.Cog):
             await ctx.send(f"Exam must be one of {EXAMS.keys()}")
             return
 
-        correct, attempted, total = await fetch_user_exam_totals(
+        correct, unique_attempted, total_attempts, total = await fetch_user_exam_totals(
             ctx.author.id, exam, table
         )
 
@@ -102,13 +102,34 @@ class UserCog(commands.Cog):
             color=discord.Color.blurple(),
         )
 
-        embed.add_field(name="Total Correct", value=f"{correct}", inline=True)
-        embed.add_field(name="Total Attempted", value=f"{attempted}", inline=True)
-        embed.add_field(name="Total Questions in bank", value=f"{total}", inline=True)
-        percent_correct = (correct / attempted * 100) if attempted else 0.0
         embed.add_field(
-            name="Percent Correct",
+            name="Total Correct (Unique)",
+            value=f"{correct} / {total}",
+            inline=True,
+        )
+        embed.add_field(
+            name="Unique Attempted",
+            value=f"{unique_attempted}",
+            inline=True,
+        )
+        embed.add_field(
+            name="Total Attempts",
+            value=f"{total_attempts}",
+            inline=True,
+        )
+        embed.add_field(name="Total Questions in bank", value=f"{total}", inline=True)
+        percent_correct = (
+            (correct / unique_attempted * 100) if unique_attempted else 0.0
+        )
+        percent_exam_correct = (correct / total * 100) if total else 0.0
+        embed.add_field(
+            name="Percent Correct of Attempted",
             value=f"{round(percent_correct, 2)}%",
+            inline=True,
+        )
+        embed.add_field(
+            name="Percent of Question Bank Completed",
+            value=f"{round(percent_exam_correct, 2)}%",
             inline=True,
         )
 

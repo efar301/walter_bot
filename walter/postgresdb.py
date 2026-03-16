@@ -147,15 +147,6 @@ async def add_attempt(
 
         await conn.execute(
             """
-            DELETE FROM question_attempts
-            WHERE user_id = $1 AND question_id = $2 AND mode = 'single'
-            """,
-            internal_user_id,
-            question_id,
-        )
-
-        await conn.execute(
-            """
             INSERT INTO question_attempts
                 (user_id, question_id, mode, selected_answer, is_correct)
             VALUES
@@ -315,7 +306,7 @@ async def fetch_user_exam_totals(user_id: int, exam: str, table: str):
     async with pool.acquire() as conn:
         internal_user_id = await _get_user_id(conn, user_id, create=False)
         if internal_user_id is None:
-            return (0, 0, 0)
+            return (0, 0, 0, 0)
 
         correct_row = await conn.fetchrow(
             """
@@ -338,6 +329,18 @@ async def fetch_user_exam_totals(user_id: int, exam: str, table: str):
             code,
         )
 
+        total_attempts_row = await conn.fetchrow(
+            """
+            SELECT COUNT(*) AS total_attempts
+            FROM question_attempts qa
+            JOIN questions q ON q.id = qa.question_id
+            JOIN exams e ON e.id = q.exam_id
+            WHERE qa.user_id = $1 AND e.code = $2 AND qa.mode = 'single'
+            """,
+            internal_user_id,
+            code,
+        )
+
         total_row = await conn.fetchrow(
             """
             SELECT COUNT(*) AS total_count
@@ -350,6 +353,7 @@ async def fetch_user_exam_totals(user_id: int, exam: str, table: str):
         return (
             int(correct_row["correct_count"] or 0),
             int(correct_row["attempted_count"] or 0),
+            int(total_attempts_row["total_attempts"] or 0),
             int(total_row["total_count"] or 0),
         )
 

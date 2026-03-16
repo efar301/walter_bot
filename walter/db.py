@@ -1,8 +1,10 @@
-import aiosqlite
 from datetime import datetime, timezone
 from typing import Iterable, Optional
 
+import aiosqlite
+
 from .config import DB_PATH
+
 
 # adds a user to a the user table
 async def create_user(user_id: int) -> None:
@@ -10,9 +12,14 @@ async def create_user(user_id: int) -> None:
         created_at = datetime.now(timezone.utc).isoformat()
         await db.execute(
             "INSERT OR IGNORE INTO users (user_id, stat_decay, created_at) VALUES (?, ?, ?)",
-            (user_id, 0, created_at,)
+            (
+                user_id,
+                0,
+                created_at,
+            ),
         )
         await db.commit()
+
 
 # sets user preference for stat_decay
 async def update_user_stat_decay(user_id: int, stat_decay: bool) -> None:
@@ -24,9 +31,13 @@ async def update_user_stat_decay(user_id: int, stat_decay: bool) -> None:
             SET stat_decay = ?
             WHERE user_id = ?
             """,
-            (updated_val, user_id,)
+            (
+                updated_val,
+                user_id,
+            ),
         )
         await db.commit()
+
 
 async def update_user_stat_decay_period(user_id, period: str) -> None:
     async with aiosqlite.connect(DB_PATH) as db:
@@ -36,20 +47,33 @@ async def update_user_stat_decay_period(user_id, period: str) -> None:
             SET decay_time = ?
             WHERE user_id = ?
             """,
-            (period, user_id,)
+            (
+                period,
+                user_id,
+            ),
         )
         await db.commit()
 
 
 # adds users latest question attempt to a attempts table
-async def add_attempt(user_id: int, exam: str, question_number: int, selected_answer: str, correct: int) -> None:
+async def add_attempt(
+    user_id: int, exam: str, question_number: int, selected_answer: str, correct: int
+) -> None:
     async with aiosqlite.connect(DB_PATH) as db:
         created_at = datetime.now(timezone.utc).isoformat()
         await db.execute(
             "INSERT OR REPLACE INTO attempts (user_id, exam, question_number, selected_answer, correct, created_at) VALUES (?, ?, ?, ?, ?, ?)",
-            (user_id, exam, question_number, selected_answer, correct, created_at,)
+            (
+                user_id,
+                exam,
+                question_number,
+                selected_answer,
+                correct,
+                created_at,
+            ),
         )
         await db.commit()
+
 
 # fetches a question from an exam table
 async def fetch_one_question(query: str, params=()):
@@ -57,6 +81,7 @@ async def fetch_one_question(query: str, params=()):
         db.row_factory = aiosqlite.Row
         async with db.execute(query, params) as cur:
             return await cur.fetchone()
+
 
 # check if exam table exists in database
 async def table_exists(table: str) -> bool:
@@ -66,6 +91,7 @@ async def table_exists(table: str) -> bool:
     )
     return row is not None
 
+
 # gets a random exam question from specified exam table
 async def fetch_random(table: str):
     row = await fetch_one_question(f"SELECT COUNT(*) AS n FROM {table}")
@@ -73,11 +99,13 @@ async def fetch_random(table: str):
     if n == 0:
         return None
     import random
+
     offset = random.randrange(n)
     return await fetch_one_question(
         f"SELECT number, question_dir, solution FROM {table} LIMIT 1 OFFSET ?",
         (offset,),
     )
+
 
 # gets a specific exam question from specified exam
 async def fetch_by_number(table: str, num: int):
@@ -85,6 +113,7 @@ async def fetch_by_number(table: str, num: int):
         f"SELECT number, question_dir, solution FROM {table} WHERE number=?",
         (num,),
     )
+
 
 # gets a random exam question from specified exam by topic
 async def fetch_by_topic(table: str, exam: str, topic: str):
@@ -106,6 +135,7 @@ async def fetch_by_topic(table: str, exam: str, topic: str):
         return None
 
     import random
+
     offset = random.randrange(n)
     return await fetch_one_question(
         f"""
@@ -121,6 +151,7 @@ async def fetch_by_topic(table: str, exam: str, topic: str):
         (exam, topic, offset),
     )
 
+
 # gets question topics for an exam
 async def fetch_question_topics(exam: str, question_number: int):
     sql = """
@@ -135,6 +166,7 @@ async def fetch_question_topics(exam: str, question_number: int):
             rows = await cur.fetchall()
             return [row[0] for row in rows]
 
+
 # returns the exam stats
 async def fetch_user_exam_totals(user_id: int, exam: str, table: str):
     exam = exam.lower()
@@ -147,14 +179,22 @@ async def fetch_user_exam_totals(user_id: int, exam: str, table: str):
         """,
         (user_id, exam),
     )
-    total_row = await fetch_one_question(
-        f"SELECT COUNT(*) AS total_count FROM {table}"
+    total_attempts_row = await fetch_one_question(
+        """
+        SELECT COUNT(*) AS total_attempts
+        FROM attempts
+        WHERE user_id = ? AND exam = ?
+        """,
+        (user_id, exam),
     )
+    total_row = await fetch_one_question(f"SELECT COUNT(*) AS total_count FROM {table}")
     return (
         int(correct_row["correct_count"]),
         int(correct_row["attempted_count"]),
+        int(total_attempts_row["total_attempts"]),
         int(total_row["total_count"]),
     )
+
 
 async def fetch_exam_topics(exam: str, query: str = "", limit: int = 25):
     exam = exam.lower()
@@ -171,6 +211,7 @@ async def fetch_exam_topics(exam: str, query: str = "", limit: int = 25):
         async with db.execute(sql, (exam, like, limit)) as cur:
             rows = await cur.fetchall()
             return [row[0] for row in rows]
+
 
 # gets user exam stats per topic
 async def fetch_user_topic_stats(
@@ -211,4 +252,3 @@ async def fetch_user_topic_stats(
     async with aiosqlite.connect(DB_PATH) as db:
         async with db.execute(sql, params) as cur:
             return await cur.fetchall()
-
