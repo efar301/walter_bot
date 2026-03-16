@@ -64,7 +64,6 @@ class UserCog(commands.Cog):
         await ctx.send(embed=embed)
         return
 
-
     @userstats.autocomplete("topics")
     async def userstat_topics_autocomplete(
         self,
@@ -89,39 +88,28 @@ class UserCog(commands.Cog):
     @app_commands.choices(exam=EXAM_CHOICES)
     async def mastery(self, ctx: commands.Context, exam: str):
         table = EXAMS.get(exam)
-        
+
         if table is None:
             await ctx.send(f"Exam must be one of {EXAMS.keys()}")
             return
-            
+
         correct, attempted, total = await fetch_user_exam_totals(
             ctx.author.id, exam, table
         )
-        
+
         embed = discord.Embed(
-            title=f"{ctx.author.display_name}'s mastery for Exam {exam}",
-            color=discord.Color.blurple()
+            title=f"{ctx.author.display_name}'s mastery for Exam {exam.upper()}",
+            color=discord.Color.blurple(),
         )
-        
-        embed.add_field(
-            name="Total Correct",
-            value=f"{correct}",
-            inline=True
-        )
-        embed.add_field(
-            name="Total Attempted",
-            value=f"{attempted}",
-            inline=True
-        )
-        embed.add_field(
-            name="Total Questions in bank",
-            value=f"{total}",
-            inline=True
-        )
+
+        embed.add_field(name="Total Correct", value=f"{correct}", inline=True)
+        embed.add_field(name="Total Attempted", value=f"{attempted}", inline=True)
+        embed.add_field(name="Total Questions in bank", value=f"{total}", inline=True)
+        percent_correct = (correct / attempted * 100) if attempted else 0.0
         embed.add_field(
             name="Percent Correct",
-            value=f"{round(correct / total, 2) * 100}%",
-            inline=True
+            value=f"{round(percent_correct, 2)}%",
+            inline=True,
         )
 
         await ctx.send(embed=embed)

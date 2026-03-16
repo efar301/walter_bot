@@ -145,7 +145,6 @@ async def add_attempt(
 
         question_id = int(question_row["id"])
 
-        # Preserve previous behavior: one attempt per user/question (latest wins).
         await conn.execute(
             """
             DELETE FROM question_attempts
