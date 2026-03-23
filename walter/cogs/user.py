@@ -61,7 +61,7 @@ class UserCog(commands.Cog):
                 value=f"\n{stat[1]} correct / {stat[2]} attempted\n{pct}% correct",
                 inline=True,
             )
-        await ctx.send(embed=embed)
+        await ctx.send(embed=embed, ephemeral=True)
         return
 
     @userstats.autocomplete("topics")
@@ -133,7 +133,7 @@ class UserCog(commands.Cog):
             inline=True,
         )
 
-        await ctx.send(embed=embed)
+        await ctx.send(embed=embed, ephemeral=True)
         return
 
     @commands.hybrid_command(

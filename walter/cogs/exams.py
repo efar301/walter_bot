@@ -108,6 +108,7 @@ class ExamsCog(commands.Cog):
             f"Solution: ||{ans}||",
             file=file,
             view=view,
+            ephemeral=True,
         )
 
     @commands.hybrid_command(
@@ -155,6 +156,7 @@ class ExamsCog(commands.Cog):
             f"Solution: ||{ans}||",
             file=file,
             view=view,
+            ephemeral=True,
         )
 
     @qt.autocomplete("topic")
